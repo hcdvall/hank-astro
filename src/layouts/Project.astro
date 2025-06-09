@@ -1,0 +1,206 @@
+---
+import MainLayout from './MainLayout.astro';
+
+const { title, startDate, description, author, heroImg } = Astro.props;
+---
+<MainLayout>
+  <article class="project">
+    <header class="project-header">
+      <div class="hero-img-container">
+        <img src={heroImg} class="hero-img" alt={title} />
+        <div class="hero-title">{title}</div>
+      </div>
+    </header>
+
+    <section class="project-content">
+      <slot />
+    </section>
+
+    <footer class="project-footer">
+      <p class="project-date">
+        Started on {startDate?.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        })}
+      </p>
+    </footer>
+  </article>
+
+  <style>
+    .project {
+      max-width: 800px;
+      margin: 0;
+      padding: 0px;
+    }
+
+    .project-header {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .project-title {
+      font-size: 2em;
+      color: var(--markdown-header-color);
+      margin: 0;
+      text-shadow: 
+        0px 0px 3px var(--markdown-header-color), 
+        0px 0px 3px var(--markdown-header-color);
+    }
+
+    .project-date {
+      font-size: 0.9em;
+      margin: 5px 0;
+    }
+
+    .project-description {
+      font-size: 1.2em;
+      margin: 10px 0;
+    }
+
+    .project-content {
+      line-height: 1.6;
+      font-size: 1em;
+    }
+    /* hero image styling */
+    .hero-img-container {
+      position: relative;
+      width: 100%;
+      height: 200px;
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+      border-radius: 0.5rem;
+    }
+    .hero-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: blur(3px);
+      display: block;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 12px 0 rgba(0,0,0,0.10);
+    }
+    .hero-title {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: var(--dracula-orange);
+      padding: 0.5em 1em;
+      border-radius: 0.5em;
+      font-size: 5rem;
+      font-weight: bold;
+      font-family: "VT323", monospace;
+      text-shadow: 0 2px 8px #000;
+      pointer-events: none;
+    }
+
+    /* Markdown Content Styling */
+    :global(.project-content h1) {
+      font-size: 2.0em;
+      margin: 2rem 0 1rem 0;
+      line-height: 1.2;
+      padding-bottom: 0.5rem;
+      font-weight: normal;
+      color: var(--markdown-header-color)
+    }
+
+    :global(.project-content h2) {
+      font-size: 1.7em;
+      color: var(--markdown-header-color);
+      margin: 1.8rem 0 1rem 0;
+      line-height: 1.3;
+    }
+
+    :global(.project-content h3) {
+      font-size: 1.5em;
+      color: var(--markdown-header-color);
+      margin: 1.5rem 0 0.8rem 0;
+      line-height: 1.4;
+    }
+
+    :global(.project-content h4) {
+      font-size: 1.2em;
+      color: var(--markdown-header-color);
+      margin: 1.2rem 0 0.6rem 0;
+    }
+
+    :global(.project-content p) {
+      margin-bottom: 1.2rem;
+      line-height: 1.7;
+    }
+
+    :global(.project-content ul, .project-content ol) {
+      margin: 1rem 0;
+      padding-left: 2rem;
+    }
+
+    :global(.project-content li) {
+      margin-bottom: 0.5rem;
+      line-height: 1.6;
+    }
+
+    :global(.project-content blockquote) {
+      border-left: 4px solid #e5e7eb;
+      padding-left: 1rem;
+      margin: 1.5rem 0;
+      font-style: italic;
+      color: #6b7280;
+    }
+
+    :global(.project-content code) {
+      background-color: var(--dracula-orange);
+      padding: 0.2rem 0.4rem;
+      border-radius: 3px;
+      font-family: 'Hermit', monospace;
+      font-weight: bold;
+      font-size: 0.9em;
+    }
+
+    :global(.project-content pre) {
+      background-color: #1f2937;
+      color: #f9fafb;
+      padding: 1rem;
+      border-radius: 6px;
+      overflow-x: auto;
+      margin: 1.5rem 0;
+    }
+
+    :global(.project-content pre code) {
+      background-color: transparent;
+      padding: 0;
+      color: inherit;
+    }
+
+    :global(.project-content a) {
+      color: var(--markdown-header-color);
+      text-decoration: underline;
+    }
+
+    :global(.project-content a:hover) {
+      color: var(--markdown-header-color);
+    }
+
+    :global(.project-content strong) {
+      font-weight: 700;
+    }
+
+    :global(.project-content em) {
+      font-style: italic;
+    }
+
+    :global(.project-content h1, h2, h3, h4)
+    {
+      text-shadow: 
+        0px 
+        0px 
+        3px 
+        var(--markdown-header-color), 
+        0px 
+        0px 
+        3px 
+        var(--markdown-header-color);
+    }
+
+  </style>
+</MainLayout>

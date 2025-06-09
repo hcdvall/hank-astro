@@ -1,0 +1,97 @@
+---
+const links = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+  { href: "/blog", label: "Blog" },
+  { href: "/projects", label: "Projects" },
+];
+---
+<nav class="navbar">
+  <ul class="navbar-links">
+    {links.map(link => (
+      <li>
+        <a href={link.href}>{link.label}</a>
+      </li>
+    ))}
+  </ul>
+  <button id="theme-toggle" class="theme-toggle">!</button>
+</nav>
+
+<style>
+  @font-face {
+    font-family: 'VT323';
+    src: url('/fonts/VT323-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'PressStart2P';
+    src: url('/fonts/PressStart2P-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  .navbar {
+    background-color: var(--navbar-background);
+    color: var(--navbar-text-color);
+    padding: 1rem;
+    font-size: 40px;
+    font-family: 'VT323';
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-shadow: 
+      0px 
+      0px 
+      3px 
+      var(--navbar-glow-color), 
+      0px 
+      0px 
+      3px 
+      var(--navbar-glow-color);
+  }
+
+  .navbar-links {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  .navbar-links a {
+    color: var(--navbar-text-color);
+    text-decoration: inherit;
+    padding: 0.1em 0.1em;
+    border-radius: 0.4em 0em 0.4em 0em;
+    transition: 
+    background-color 0.2s,
+    transform 0.2s;
+  }
+
+  .navbar-links a:hover {
+    background-color: var(--button-hover);
+    transform: scale(1.15);
+    box-shadow: 0 0 5px var(--button-hover);
+  }
+
+  .theme-toggle {
+    background-color: var(--button-background);
+    color: var(--button-text-color);
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px var(--navbar-glow-color);
+  }
+
+  .theme-toggle:hover {
+    background-color: var(--button-hover);
+    box-shadow: 0 0 5px var(--button-hover);
+  }
+</style>

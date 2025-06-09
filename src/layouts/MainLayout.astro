@@ -1,0 +1,159 @@
+---
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import ThemeToggle from "../components/ThemeToggle.astro";  
+---
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><slot name="title" /></title>
+  </head>
+  <body data-theme="dark">
+    <Navbar />
+    
+    </div>
+    <div class="content-area">
+      <div class="content-bar">
+      </div>
+      <main class="fade-in">
+        <slot />
+      </main>
+    </div>
+    <Footer />
+    <ThemeToggle />
+  </body>
+</html>
+
+<style>
+  @font-face {
+    font-family: 'GoodOldDOS';
+    src: url('/fonts/Good Old DOS.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Fira Code';
+    src: url('/fonts/FiraCode-VariableFont_wght.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  :root {
+    --dracula-background-darker: #15171F;
+    --dracula-background-lighter: #282a36;
+    --dracula-area: #44475a;
+    --dracula-foreground: #f8f8f2;
+    --dracula-comment: #6272a4;
+    --dracula-cyan: #8be9fd;
+    --dracula-green: #50fa7b;
+    --dracula-orange: #ffb86c;
+    --dracula-pink: #ff79c6;
+    --dracula-purple: #bd93f9;
+    --dracula-red: #ff5555;
+    --dracula-yellow: #f1fa8c;
+    --dracula-yellow-lighter: #fcffc0;
+    --dracula-blue: #6272a4;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Fira Code', sans-serif;
+    line-height: 1.6;
+
+    /* Default theme variables (dark theme) */
+    --background-color: var(--dracula-background-darker);
+    --navbar-background: var(--dracula-background-darker);
+    --footer-background: var(--dracula-background-darker);
+    --text-color: var(--dracula-foreground);
+    --navbar-text-color: var(--dracula-green);
+    --navbar-glow-color: var(--dracula-green);
+    --button-background: var(--dracula-green);
+    --button-hover: var(--dracula-pink);
+    --button-text-color: #ffffff;
+    --markdown-header-color: var(--dracula-purple);
+  }
+
+  /* Light theme overrides */
+  body[data-theme="light"] {
+    --background-color: var(--dracula-yellow);
+    --navbar-background: var(--dracula-yellow);
+    --footer-background: var(--dracula-yellow);
+    --text-color: #var(var(--dracula-background));
+    --navbar-text-color: var(--dracula-pink);
+    --navbar-glow-color: var(--dracula-pink);
+    --button-background: var(--dracula-pink);
+    --button-hover: var(--dracula-green);
+    --button-text-color: #ffffff;
+    --markdown-header-color: var(--dracula-purple);
+  }
+
+  /* Apply variables to the body */
+  body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+  }
+
+  main {
+    padding: 2rem;
+  }
+
+/* .content-area {
+  background: var(--dracula-background-darker);
+  border-radius: 0rem;
+  box-shadow: 0 4px 24px 0 rgba(0,0,0,0.15);
+  padding: 0rem 1rem 1rem 1rem; 
+  margin: 1rem 1rem;
+  border: 2px solid var(--dracula-background-lighter);
+  box-sizing: border-box;
+  position: relative;
+} */
+
+/* .content-bar {
+  height: 2.2rem;
+  background: var(--dracula-background-lighter);
+  display: flex;
+  align-items: center;
+  padding-left: 1rem;
+  padding-top: 0.5rem;
+  font-family: 'GoodOldDOS', monospace;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--dracula-foreground); 
+  border-bottom: 2px solid var(--dracula-background-lighter);
+  margin: 0 -1rem 1rem -1rem; 
+} */
+
+  /* Fade-in animation */
+  .fade-in {
+    opacity: 0;
+    animation: fadeIn 1s ease-in forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* Fade-out animation */
+  .fade-out {
+    opacity: 1;
+    animation: fadeOut 1s ease-out forwards;
+  }
+
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+</style>

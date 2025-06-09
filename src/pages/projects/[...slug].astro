@@ -1,0 +1,30 @@
+---
+import { getEntry, getCollection } from 'astro:content';
+import Project from '../../layouts/Project.astro';
+
+// Generate paths for all projects
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const project = await getEntry('projects', slug);
+
+if (!project) {
+  throw new Error(`Project not found for slug: ${slug}`);
+}
+
+const { Content } = await project.render();
+---
+<Project 
+  title={project.data.title}
+  startDate={project.data.startDate}
+  description={project.data.description}
+  author={project.data.author}
+  heroImg={project.data.heroImg}
+>
+  <Content />
+</Project>

@@ -1,0 +1,60 @@
+---
+import { getCollection } from 'astro:content';
+import MainLayout from '../../layouts/MainLayout.astro';
+
+// Fetch and sort blog posts by pubDate (newest first)
+const blogPosts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+<MainLayout>
+  <ul class="blog-list">
+    {blogPosts.map(post => (
+      <li class="blog-item">
+        <a href={`/blog/${post.slug}/`} class="blog-title">{"> " + post.data.title}</a>
+        <span class="blog-date">
+          {post.data.pubDate.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+          })}
+        </span>
+      </li>
+    ))}
+  </ul>
+</MainLayout>
+
+<style>
+  .blog-list {
+    max-width: 800px;
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .blog-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+
+  .blog-title {
+    flex: 1;
+    min-width: 200px;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .blog-date {
+    font-size: 0.9em;
+    color: gray;
+    flex-shrink: 0;
+    margin-left: 20px;
+  }
+
+  .blog-description {
+    width: 100%;
+    margin-top: 10px;
+  }
+</style>

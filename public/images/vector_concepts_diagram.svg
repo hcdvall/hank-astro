@@ -1,0 +1,214 @@
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="800" height="600" fill="#1a1a2e"/>
+  
+  <!-- Title -->
+  <text x="400" y="30" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="bold">
+    Dot Product vs Cross Product in Game Dev 🎮
+  </text>
+  
+  <!-- Dot Product Section -->
+  <g id="dot-product">
+    <!-- Background box -->
+    <rect x="20" y="60" width="360" height="260" fill="#16213e" rx="10" stroke="#4a90e2" stroke-width="2"/>
+    
+    <!-- Section title -->
+    <text x="200" y="85" text-anchor="middle" fill="#4a90e2" font-size="18" font-weight="bold">
+      DOT PRODUCT: "Friendship Meter"
+    </text>
+    
+    <!-- Formula -->
+    <text x="200" y="110" text-anchor="middle" fill="#ffffff" font-size="14">
+      A · B = |A| × |B| × cos(θ) = scalar
+    </text>
+    
+    <!-- Vector diagrams -->
+    <!-- Positive dot product (same direction) -->
+    <g transform="translate(60, 130)">
+      <text x="0" y="0" fill="#00ff88" font-size="12" font-weight="bold">Positive: Same Direction</text>
+      <line x1="10" y1="20" x2="70" y2="20" stroke="#ff6b6b" stroke-width="3" marker-end="url(#arrowRed)"/>
+      <line x1="10" y1="30" x2="60" y2="30" stroke="#4ecdc4" stroke-width="3" marker-end="url(#arrowBlue)"/>
+      <text x="10" y="50" fill="#00ff88" font-size="11">Result: +1.0</text>
+      <text x="10" y="65" fill="#cccccc" font-size="10">Player moving forward</text>
+    </g>
+    
+    <!-- Zero dot product (perpendicular) -->
+    <g transform="translate(60, 200)">
+      <text x="0" y="0" fill="#ffeb3b" font-size="12" font-weight="bold">Zero: Perpendicular</text>
+      <line x1="10" y1="20" x2="50" y2="20" stroke="#ff6b6b" stroke-width="3" marker-end="url(#arrowRed)"/>
+      <line x1="10" y1="20" x2="10" y2="60" stroke="#4ecdc4" stroke-width="3" marker-end="url(#arrowBlue)"/>
+      <text x="10" y="75" fill="#ffeb3b" font-size="11">Result: 0.0</text>
+      <text x="10" y="90" fill="#cccccc" font-size="10">Player strafing</text>
+    </g>
+    
+    <!-- Negative dot product (opposite) -->
+    <g transform="translate(220, 130)">
+      <text x="0" y="0" fill="#ff4757" font-size="12" font-weight="bold">Negative: Opposite</text>
+      <line x1="10" y1="20" x2="50" y2="20" stroke="#ff6b6b" stroke-width="3" marker-end="url(#arrowRed)"/>
+      <line x1="60" y1="30" x2="20" y2="30" stroke="#4ecdc4" stroke-width="3" marker-end="url(#arrowBlue)"/>
+      <text x="10" y="50" fill="#ff4757" font-size="11">Result: -1.0</text>
+      <text x="10" y="65" fill="#cccccc" font-size="10">Enemy behind player</text>
+    </g>
+    
+    <!-- Use cases -->
+    <text x="200" y="280" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="bold">
+      Use for: Vision cones, Lighting, Field of view
+    </text>
+  </g>
+  
+  <!-- Cross Product Section -->
+  <g id="cross-product">
+    <!-- Background box -->
+    <rect x="400" y="60" width="380" height="260" fill="#2d1b3d" rx="10" stroke="#9b59b6" stroke-width="2"/>
+    
+    <!-- Section title -->
+    <text x="590" y="85" text-anchor="middle" fill="#9b59b6" font-size="18" font-weight="bold">
+      CROSS PRODUCT: "Perpendicular Wizard"
+    </text>
+    
+    <!-- Formula -->
+    <text x="590" y="110" text-anchor="middle" fill="#ffffff" font-size="14">
+      A × B = vector perpendicular to both A and B
+    </text>
+    
+    <!-- 3D visualization -->
+    <g transform="translate(450, 130)">
+      <text x="0" y="0" fill="#e74c3c" font-size="12" font-weight="bold">3D Cross Product</text>
+      
+      <!-- X axis (red) -->
+      <line x1="50" y1="60" x2="120" y2="60" stroke="#e74c3c" stroke-width="3" marker-end="url(#arrowRed)"/>
+      <text x="125" y="65" fill="#e74c3c" font-size="10">X</text>
+      
+      <!-- Y axis (green) -->
+      <line x1="50" y1="60" x2="50" y2="10" stroke="#2ecc71" stroke-width="3" marker-end="url(#arrowGreen)"/>
+      <text x="35" y="8" fill="#2ecc71" font-size="10">Y</text>
+      
+      <!-- Z axis (blue) - coming out -->
+      <circle cx="50" cy="60" r="3" fill="#3498db"/>
+      <circle cx="50" cy="60" r="8" fill="none" stroke="#3498db" stroke-width="2"/>
+      <text x="25" y="75" fill="#3498db" font-size="10">Z (out)</text>
+      <text x="25" y="88" fill="#cccccc" font-size="9">X × Y = Z</text>
+    </g>
+    
+    <!-- Surface normal example -->
+    <g transform="translate(600, 140)">
+      <text x="0" y="0" fill="#f39c12" font-size="12" font-weight="bold">Surface Normal</text>
+      
+      <!-- Triangle -->
+      <polygon points="20,40 60,40 40,10" fill="#34495e" stroke="#ffffff" stroke-width="1"/>
+      
+      <!-- Edge vectors -->
+      <line x1="20" y1="40" x2="40" y2="10" stroke="#e67e22" stroke-width="2" marker-end="url(#arrowOrange)"/>
+      <line x1="20" y1="40" x2="60" y2="40" stroke="#e67e22" stroke-width="2" marker-end="url(#arrowOrange)"/>
+      
+      <!-- Normal vector -->
+      <line x1="40" y1="30" x2="40" y2="5" stroke="#f1c40f" stroke-width="3" marker-end="url(#arrowYellow)"/>
+      <text x="45" y="8" fill="#f1c40f" font-size="9">Normal</text>
+      
+      <text x="0" y="65" fill="#cccccc" font-size="9">Edge1 × Edge2 = Normal</text>
+    </g>
+    
+    <!-- Use cases -->
+    <text x="590" y="280" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="bold">
+      Use for: Surface normals, Camera rotation, Physics torque
+    </text>
+  </g>
+  
+  <!-- Game Examples Section -->
+  <g id="game-examples">
+    <rect x="20" y="340" width="760" height="240" fill="#0f3460" rx="10" stroke="#00d4aa" stroke-width="2"/>
+    
+    <text x="400" y="365" text-anchor="middle" fill="#00d4aa" font-size="18" font-weight="bold">
+      Real Game Examples 🎯
+    </text>
+    
+    <!-- Enemy Vision Example -->
+    <g transform="translate(60, 380)">
+      <text x="0" y="0" fill="#ff6b6b" font-size="14" font-weight="bold">Enemy Vision (Dot Product)</text>
+      
+      <!-- Guard -->
+      <circle cx="30" cy="30" r="8" fill="#ff6b6b"/>
+      <line x1="30" y1="30" x2="80" y2="30" stroke="#ff6b6b" stroke-width="2" marker-end="url(#arrowRed)"/>
+      <text x="85" y="35" fill="#ffffff" font-size="10">Guard facing</text>
+      
+      <!-- Player positions -->
+      <circle cx="100" cy="30" r="5" fill="#00ff88"/>
+      <text x="105" y="25" fill="#00ff88" font-size="9">Spotted!</text>
+      <text x="105" y="38" fill="#00ff88" font-size="9">dot > 0</text>
+      
+      <circle cx="80" cy="60" r="5" fill="#ffeb3b"/>
+      <text x="85" y="55" fill="#ffeb3b" font-size="9">Hidden</text>
+      <text x="85" y="68" fill="#ffeb3b" font-size="9">dot ≤ 0</text>
+      
+      <!-- Vision cone -->
+      <path d="M 30 30 L 100 10 A 50 50 0 0 1 100 50 Z" fill="#ff6b6b" opacity="0.2"/>
+    </g>
+    
+    <!-- Lighting Example -->
+    <g transform="translate(280, 380)">
+      <text x="0" y="0" fill="#f1c40f" font-size="14" font-weight="bold">Surface Lighting (Dot Product)</text>
+      
+      <!-- Surface -->
+      <line x1="20" y1="50" x2="80" y2="50" stroke="#ecf0f1" stroke-width="4"/>
+      
+      <!-- Normal -->
+      <line x1="50" y1="50" x2="50" y2="20" stroke="#3498db" stroke-width="2" marker-end="url(#arrowBlue)"/>
+      <text x="55" y="18" fill="#3498db" font-size="9">Normal</text>
+      
+      <!-- Light ray -->
+      <line x1="30" y1="10" x2="45" y2="35" stroke="#f1c40f" stroke-width="2" marker-end="url(#arrowYellow)"/>
+      <text x="10" y="8" fill="#f1c40f" font-size="9">Light</text>
+      
+      <text x="20" y="70" fill="#ffffff" font-size="10">Brightness = dot(normal, light)</text>
+    </g>
+    
+    <!-- Camera Rotation Example -->
+    <g transform="translate(500, 380)">
+      <text x="0" y="0" fill="#9b59b6" font-size="14" font-weight="bold">Camera Orbit (Cross Product)</text>
+      
+      <!-- Player/target -->
+      <circle cx="50" cy="40" r="6" fill="#e74c3c"/>
+      <text x="58" y="45" fill="#ffffff" font-size="9">Player</text>
+      
+      <!-- Camera -->
+      <rect x="20" y="20" width="8" height="6" fill="#34495e"/>
+      <text x="5" y="18" fill="#ffffff" font-size="9">Cam</text>
+      
+      <!-- Orbit path -->
+      <circle cx="50" cy="40" r="25" fill="none" stroke="#9b59b6" stroke-width="1" stroke-dasharray="3,3"/>
+      
+      <!-- Direction vectors -->
+      <line x1="50" y1="40" x2="24" y2="23" stroke="#e67e22" stroke-width="1"/>
+      <text x="30" y="28" fill="#e67e22" font-size="8">to cam</text>
+      
+      <line x1="50" y1="40" x2="50" y2="15" stroke="#2ecc71" stroke-width="1"/>
+      <text x="52" y="13" fill="#2ecc71" font-size="8">up</text>
+      
+      <text x="10" y="70" fill="#ffffff" font-size="10">Right = cross(toCam, up)</text>
+    </g>
+    
+    <!-- Key insight -->
+    <text x="400" y="550" text-anchor="middle" fill="#00d4aa" font-size="16" font-weight="bold">
+      💡 Dot Product = Single Number | Cross Product = New Vector
+    </text>
+  </g>
+  
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arrowRed" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <polygon points="0,0 0,6 9,3" fill="#ff6b6b"/>
+    </marker>
+    <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <polygon points="0,0 0,6 9,3" fill="#4ecdc4"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <polygon points="0,0 0,6 9,3" fill="#2ecc71"/>
+    </marker>
+    <marker id="arrowOrange" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <polygon points="0,0 0,6 9,3" fill="#e67e22"/>
+    </marker>
+    <marker id="arrowYellow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <polygon points="0,0 0,6 9,3" fill="#f1c40f"/>
+    </marker>
+  </defs>
+</svg>
