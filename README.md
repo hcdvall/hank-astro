@@ -1,47 +1,91 @@
-# Astro Starter Kit: Minimal
+# Hank Astro Portfolio
 
-```sh
-npm create astro@latest -- --template minimal
+This is a personal portfolio site built with [Astro](https://astro.build/), featuring blog posts, project showcases, and a custom Dracula-inspired theme.
+
+## Features
+
+- **Astro-powered static site** for fast performance and easy deployment
+- **Blog**: Write posts in Markdown with custom layouts and code highlighting
+- **Projects**: Showcase your projects with hero images, descriptions, and custom Markdown content
+- **Dracula color theme** for a modern, dark look
+- **Responsive design** for desktop and mobile
+- **Customizable Navbar** with links to Home, About, Blog, and Projects
+- **Themed content areas** with terminal-inspired styling
+- **Image handling**: Hero images for projects, with support for additional images in Markdown
+- **Content collections** powered by Astro Content Collections
+
+## Getting Started
+
+1. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+2. **Run the development server:**
+   ```bash
+   npm run dev
+   ```
+
+3. **Build for production:**
+   ```bash
+   npm run build
+   ```
+
+4. **Preview the production build:**
+   ```bash
+   npm run preview
+   ```
+
+## Project Structure
+
+```
+src/
+  components/      # Reusable UI components (Navbar, Footer, ThemeToggle, etc.)
+  content/
+    blog/          # Blog posts in Markdown
+    projects/      # Project entries in Markdown
+    config.ts      # Content collections schema
+  layouts/         # Astro layout components (MainLayout, BlogPost, Project, etc.)
+  pages/           # Astro pages (routes)
+public/
+  images/          # Static images (hero images, blog images, etc.)
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
+## Content Collections
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+- **Blog posts**:  
+  Located in `src/content/blog/`.  
+  Frontmatter fields: `title`, `description`, `pubDate`, `author`.
 
-## 🚀 Project Structure
+- **Projects**:  
+  Located in `src/content/projects/`.  
+  Frontmatter fields: `title`, `description`, `startDate`, `author` (optional), `heroImg` (optional).
 
-Inside of your Astro project, you'll see the following folders and files:
+## Adding Content
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+- **Add a blog post:**  
+  Create a new `.md` file in `src/content/blog/` with the required frontmatter.
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+- **Add a project:**  
+  Create a new `.md` file in `src/content/projects/` with the required frontmatter.  
+  Place hero images in `public/images/` and reference them with a leading `/`.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## Customization
 
-Any static assets, like images, can be placed in the `public/` directory.
+- **Colors and theme:**  
+  Edit CSS variables in `src/layouts/MainLayout.astro` for Dracula theme customization.
 
-## 🧞 Commands
+- **Navigation:**  
+  Update `src/components/Navbar.astro` to add or remove links.
 
-All commands are run from the root of the project, from a terminal:
+- **Image styles:**  
+  Adjust image styling in `src/layouts/Project.astro` for hero and content images.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## License
 
-## 👀 Want to learn more?
+This project is for personal use and demonstration.  
+Feel free to adapt it for your own portfolio!
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+---
+
+Built with [Astro](https://astro.build/) 🚀
