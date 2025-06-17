@@ -16,6 +16,7 @@ const projectsCollection = defineCollection({
     startDate: z.date(),
     author: z.string().optional(),
     heroImg: z.string().optional(),
+    highlight: z.boolean().default(false),
   }),
 });
 

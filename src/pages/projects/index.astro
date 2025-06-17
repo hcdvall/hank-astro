@@ -12,6 +12,7 @@ const projects = (await getCollection('projects')).sort(
     {projects.map(project => (
       <li class="project-item">
         <a href={`/projects/${project.slug}/`} class="project-title">{"> " + project.data.title}</a>
+        <span class="dot-leader"></span>
         <span class="project-date">
           {project.data.startDate.toLocaleDateString('en-US', {
             year: 'numeric',
@@ -26,9 +27,12 @@ const projects = (await getCollection('projects')).sort(
 
 <style>
   .project-list {
-    max-width: 800px;
+    max-width: 1200px;
     list-style-type: none;
     padding: 0;
+    margin-top: -4.0rem;
+    font-family: 'VT323', monospace;
+    font-size: 1.8em;
   }
 
   .project-item {
@@ -36,20 +40,50 @@ const projects = (await getCollection('projects')).sort(
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    margin-bottom: 20px;
   }
 
   .project-title {
-    flex: 1;
-    min-width: 200px;
+    flex: 0 1 auto;
     text-decoration: none;
     color: inherit;
+  }
+
+  .dot-leader {
+    flex: 1 1 auto;
+    height: 0.8em;
+    margin: 0 0.5em;
+    position: relative;
+    opacity: 1.0;
+    border-bottom: none;
+    background-image: repeating-linear-gradient(
+      to right,
+      #888 0 2px,
+      transparent 2px 11px
+    );
+    background-position: bottom;
+    background-size: 12px 3px;
+    background-repeat: repeat-x;
+    transition: opacity 0.2s;
   }
 
   .project-date {
     font-size: 0.9em;
     color: gray;
     flex-shrink: 0;
-    margin-left: 20px;
+  }
+
+  @media (max-width: 600px) {
+    .project-item {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-top: 0.3em
+    }
+    .dot-leader {
+      display: none;
+    }
+    .project-date {
+      margin-left: 0;
+      margin-top: -0.5em;
+    }
   }
 </style>

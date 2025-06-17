@@ -2,5 +2,85 @@
 import MainLayout from '../layouts/MainLayout.astro';
 ---
 <MainLayout>
-	<h1>Aböt mi</h1>
+  <section class="about-container">
+    <h1 class="about-title">👋 About Me</h1>
+    <div class="about-content">
+      <img src="/images/avatar.png" alt="Avatar" class="about-avatar" />
+      <div>
+        <p>
+          Hi! I'm Henrik Sedvall, a passionate game developer and programmer with a love for physics-based gameplay, creative problem-solving, and pixel-perfect design.
+        </p>
+        <p>
+          I enjoy building interactive experiences, exploring new technologies, and sharing knowledge through blog posts and open source projects.
+        </p>
+        <ul class="about-list">
+          <li>🎮 Gameplay & Systems Programming</li>
+          <li>🧩 Puzzle & Platformer Design</li>
+          <li>💡 Physics, AI, and Scripting</li>
+          <li>🌈 Pixel Art & Visual Effects</li>
+          <li>🚀 Always learning something new!</li>
+        </ul>
+        <p>
+          When I'm not coding, you'll find me hiking, playing indie games, or tinkering with retro tech.
+        </p>
+      </div>
+    </div>
+  </section>
+  <style>
+    .about-container {
+      max-width: 800px;
+      margin: 3rem auto;
+      padding: 2rem 1.5rem;
+      background: var(--dracula-background-lighter, #282a36);
+      border-radius: 1rem;
+      box-shadow: 0 4px 24px 0 rgba(0,0,0,0.15);
+      font-family: 'Fira Code', monospace;
+    }
+    .about-title {
+      font-size: 2.5rem;
+      color: var(--dracula-pink, #ff79c6);
+      text-align: center;
+      margin-bottom: 2rem;
+      font-family: 'GoodOldDOS', monospace;
+      text-shadow: 0 2px 8px #000;
+    }
+    .about-content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      align-items: flex-start;
+    }
+    .about-avatar {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 2px 12px 0 rgba(0,0,0,0.10);
+      border: 3px solid var(--dracula-pink, #ff79c6);
+      background: #222;
+      margin-bottom: 1rem;
+    }
+    .about-content > div {
+      flex: 1 1 250px;
+    }
+    .about-list {
+      margin: 1.5rem 0;
+      padding-left: 1.5rem;
+      list-style: square;
+      color: var(--dracula-green, #50fa7b);
+      font-size: 1.1em;
+    }
+    .about-list li {
+      margin-bottom: 0.5em;
+    }
+    @media (max-width: 600px) {
+      .about-content {
+        flex-direction: column;
+        align-items: center;
+      }
+      .about-avatar {
+        margin-bottom: 1.5rem;
+      }
+    }
+  </style>
 </MainLayout>

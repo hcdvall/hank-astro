@@ -4,6 +4,7 @@ description: "Third person physics-based puzzle game"
 startDate: 2022-06-15
 author: "Henrik Sedvall"
 heroImg: "/images/rouse/Rouse_aiming_abort_sprint.gif"
+highlight: true
 ---
 
 ## About

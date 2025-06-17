@@ -13,7 +13,6 @@ import { ClientRouter } from "astro:transitions";
   </head>
   <body data-theme="dark">
     <Navbar />
-    
     </div>
     <div class="content-area">
       <div class="content-bar">
@@ -75,7 +74,7 @@ import { ClientRouter } from "astro:transitions";
     --button-background: var(--dracula-green);
     --button-hover: var(--dracula-pink);
     --button-text-color: #ffffff;
-    --markdown-header-color: var(--dracula-purple);
+    --markdown-header-color: var(--dracula-yellow);
   }
 
   /* Light theme overrides */
@@ -102,6 +101,11 @@ import { ClientRouter } from "astro:transitions";
     padding: 2rem;
   }
 
+  .content-area{
+    max-width: 1200px;
+    margin: 2rem auto;         /* Center horizontally with vertical spacing */
+    padding: 0 1.5rem; 
+  }
 /* .content-area {
   background: var(--dracula-background-darker);
   border-radius: 0rem;

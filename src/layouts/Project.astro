@@ -1,7 +1,7 @@
 ---
 import MainLayout from './MainLayout.astro';
 
-const { title, startDate, description, author, heroImg } = Astro.props;
+const { title, startDate, description, author, heroImg, highlight} = Astro.props;
 ---
 <MainLayout>
   <article class="project">
@@ -29,7 +29,7 @@ const { title, startDate, description, author, heroImg } = Astro.props;
 
   <style>
     .project {
-      max-width: 800px;
+      max-width: 1200px;
       margin: 0;
       padding: 0px;
     }
