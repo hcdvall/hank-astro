@@ -2,6 +2,7 @@
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import { ClientRouter } from "astro:transitions";
+
 ---
 <html lang="en">
   <head>
@@ -79,9 +80,9 @@ import { ClientRouter } from "astro:transitions";
 
   /* Light theme overrides */
   body[data-theme="light"] {
-    --background-color: var(--dracula-yellow);
-    --navbar-background: var(--dracula-yellow);
-    --footer-background: var(--dracula-yellow);
+    --background-color: var(--dracula-yellow-lighter);
+    --navbar-background: var(--dracula-yellow-lighter);
+    --footer-background: var(--dracula-yellow-lighter);
     --text-color: #var(var(--dracula-background));
     --navbar-text-color: var(--dracula-pink);
     --navbar-glow-color: var(--dracula-pink);
@@ -104,7 +105,8 @@ import { ClientRouter } from "astro:transitions";
   .content-area{
     max-width: 1200px;
     margin: 2rem auto;         /* Center horizontally with vertical spacing */
-    padding: 0 1.5rem; 
+    padding: 0 1.5rem;
+    padding-top: 80px;;
   }
 /* .content-area {
   background: var(--dracula-background-darker);

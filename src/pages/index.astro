@@ -8,11 +8,13 @@ const highlightedProjects = allProjects
   .sort((a, b) => b.data.startDate.valueOf() - a.data.startDate.valueOf())
   .slice(0, 3);
 ---
+
 <MainLayout>
   <!-- Hero Section -->
   <section class="hero-section">
     <div class="hero-content">
-      <h1 class="glitch" data-text="HENRIK_SEDVALL">HENRIK_SEDVALL</h1>
+      <h1 class="glitch" 
+        data-text="HENRIK_SEDVALL">HENRIK_SEDVALL</h1>
       <div class="typing-animation" id="typing-text"></div>
       <div class="cta-buttons">
         <a href="#projects" class="btn">View Projects</a>
@@ -22,7 +24,7 @@ const highlightedProjects = allProjects
   </section>
 
   <!-- Highlighted Projects -->
-  <section class="section">
+  <section class="section fade-on-scroll">
     <h2>Featured Projects</h2>
     <div class="project-grid">
       {highlightedProjects.length === 0 && <p>No highlighted projects yet.</p>}
@@ -41,7 +43,7 @@ const highlightedProjects = allProjects
   </section>
 
   <!-- Skills -->
-  <section class="section skills-section">
+  <section class="section skills-section fade-on-scroll">
     <h2>Technical Skills</h2>
     <div class="skills-grid">
       <div class="skill-category">
@@ -72,7 +74,7 @@ const highlightedProjects = allProjects
   </section>
 
   <!-- Experience Timeline -->
-  <section class="section experience-section">
+  <section class="section experience-section fade-on-scroll">
     <h2>Experience Timeline</h2>
     <div class="experience-timeline">
       <div class="experience-item">
@@ -112,12 +114,13 @@ const highlightedProjects = allProjects
 
   <style>
     .hero-section {
-      min-height: 50vh;
+      min-height: 100vh;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
+      padding-top: 15rem;
+      margin-bottom: -40vh;
       background: linear-gradient(135deg, var(--dracula-background) 0%, #1a1b26 100%);
-      position: relative;
     }
 
     .hero-content {
@@ -405,9 +408,20 @@ const highlightedProjects = allProjects
       line-height: 1.6;
     }
 
+    .fade-on-scroll {
+      opacity: 0.1;
+      transform: translateY(40px);
+      transition: opacity 0.7s, transform 0.7s;
+    }
+
+    .fade-on-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     @media (max-width: 768px) {
       .hero-section h1 {
-        font-size: 2.5rem;
+        font-size: 3rem;
       }
       .hero-text {
         font-size: 1.2rem;
@@ -469,4 +483,21 @@ const highlightedProjects = allProjects
   
   typeWriter();
 </script>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      } else {
+        entry.target.classList.remove('visible');
+      }
+    });
+  }, { threshold: 0.4 }); // 20% of the section must be visible
+
+  document.querySelectorAll('.fade-on-scroll').forEach(section => {
+    observer.observe(section);
+  });
+</script>
+
 </MainLayout>
