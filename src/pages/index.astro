@@ -303,35 +303,47 @@ const highlightedProjects = allProjects
     }
 
     .skills-section {
-      background: var(--dracula-background-lighter);
+      padding: 4rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 3rem;
+      justify-items: center;
+      text-align: center;
     }
 
     .skill-category {
-      padding: 1.5rem;
-      border-radius: 0.5rem;
+      padding: 2rem 0;
     }
 
     .skill-category h3 {
       color: var(--dracula-orange);
-      margin-bottom: 1rem;
-      font-size: 1.3rem;
+      margin-bottom: 1.5rem;
+      font-size: 1.4rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
     }
 
     .skill-category ul {
       list-style: none;
       padding: 0;
+      margin: 0;
     }
 
     .skill-category li {
       color: var(--dracula-green);
-      margin-bottom: 0.5rem;
-      font-size: 1.1rem;
+      margin-bottom: 0.8rem;
+      font-size: 1rem;
+      padding: 0.2rem 0;
+      transition: color 0.2s ease;
+    }
+
+    .skill-category li:hover {
+      color: var(--dracula-cyan);
     }
 
     .experience-section {
@@ -441,6 +453,23 @@ const highlightedProjects = allProjects
 
       .experience-marker {
         left: -2.1rem;
+      }
+
+      .skills-section {
+        padding: 2rem 1rem;
+      }
+      
+      .skills-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      
+      .skill-category {
+        padding: 1.5rem 0;
+      }
+      
+      .skill-category h3 {
+        font-size: 1.3rem;
       }
     }
   </style>
