@@ -2,6 +2,7 @@
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import { ClientRouter } from "astro:transitions";
+const { showNavbar = true, showFooter = true } = Astro.props;
 
 ---
 <html lang="en">
@@ -13,8 +14,7 @@ import { ClientRouter } from "astro:transitions";
     <ClientRouter />
   </head>
   <body data-theme="dark">
-    <Navbar />
-    </div>
+    {showNavbar && <Navbar />}
     <div class="content-area">
       <div class="content-bar">
       </div>
@@ -22,7 +22,7 @@ import { ClientRouter } from "astro:transitions";
         <slot />
       </main>
     </div>
-    <Footer />
+    {showFooter && <Footer />}
   </body>
 </html>
 

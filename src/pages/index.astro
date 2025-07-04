@@ -9,7 +9,7 @@ const highlightedProjects = allProjects
   .slice(0, 3);
 ---
 
-<MainLayout>
+<MainLayout showNavbar={false} showFooter={false}>
   <!-- Hero Section -->
   <section class="hero-section">
     <div class="hero-content">
@@ -17,97 +17,10 @@ const highlightedProjects = allProjects
         data-text="HENRIK_SEDVALL">HENRIK_SEDVALL</h1>
       <div class="typing-animation" id="typing-text"></div>
       <div class="cta-buttons">
-        <a href="#projects" class="btn">View Projects</a>
-        <a href="#contact" class="btn">Get In Touch</a>
+        <a href="home" class="btn">ENTER</a>
       </div>
-    </div>
-  </section>
-
-  <!-- Highlighted Projects -->
-  <section class="section fade-on-scroll">
-    <h2>Featured Projects</h2>
-    <div class="project-grid">
-      {highlightedProjects.length === 0 && <p>No highlighted projects yet.</p>}
-      {highlightedProjects.map(project => (
-        <a href={`/projects/${project.slug}/`} class="project-card">
-          {project.data.heroImg && (
-            <img src={project.data.heroImg} alt={project.data.title} class="project-img" />
-          )}
-          <div class="project-info">
-            <h3>{project.data.title}</h3>
-            <p>{project.data.description}</p>
-          </div>
-        </a>
-      ))}
-    </div>
-  </section>
-
-  <!-- Skills -->
-  <section class="section skills-section fade-on-scroll">
-    <h2>Technical Skills</h2>
-    <div class="skills-grid">
-      <div class="skill-category">
-        <h3>Game Engines</h3>
-        <ul>
-          <li>Unity 3D/2D</li>
-          <li>Unreal Engine</li>
-          <li>Godot</li>
-        </ul>
-      </div>
-      <div class="skill-category">
-        <h3>Programming</h3>
-        <ul>
-          <li>C# / C++</li>
-          <li>JavaScript / TypeScript</li>
-          <li>Python</li>
-        </ul>
-      </div>
-      <div class="skill-category">
-        <h3>Specialties</h3>
-        <ul>
-          <li>Gameplay Systems</li>
-          <li>Physics & AI</li>
-          <li>Performance Optimization</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- Experience Timeline -->
-  <section class="section experience-section fade-on-scroll">
-    <h2>Experience Timeline</h2>
-    <div class="experience-timeline">
-      <div class="experience-item">
-        <div class="experience-marker"></div>
-        <div class="experience-date">2023 - Present</div>
-        <h3 class="experience-title">Senior Game Developer</h3>
-        <div class="experience-company">Pixel Dynamics Studio</div>
-        <p class="experience-description">
-          Leading development of next-generation VR experiences and optimizing game performance across multiple platforms. 
-          Mentoring junior developers and establishing best practices.
-        </p>
-      </div>
-
-      <div class="experience-item">
-        <div class="experience-marker"></div>
-        <div class="experience-date">2021 - 2023</div>
-        <h3 class="experience-title">Game Programmer</h3>
-        <div class="experience-company">Indie Game Collective</div>
-        <p class="experience-description">
-          Developed gameplay systems and implemented AI behaviors for multiple indie titles. 
-          Specialized in performance optimization and cross-platform deployment.
-        </p>
-      </div>
-
-      <div class="experience-item">
-        <div class="experience-marker"></div>
-        <div class="experience-date">2019 - 2021</div>
-        <h3 class="experience-title">Junior Developer</h3>
-        <div class="experience-company">Tech Startup Games</div>
-        <p class="experience-description">
-          Started career working on mobile games and learning industry best practices. 
-          Gained experience with agile development and collaborative workflows.
-        </p>
+      <div class="theme-toggle-container">
+        <button id="theme-toggle" class="theme-toggle">!</button>
       </div>
     </div>
   </section>
@@ -225,6 +138,32 @@ const highlightedProjects = allProjects
       overflow: hidden;
     }
 
+    .theme-toggle-container {
+      position: fixed;
+      left: 50%;
+      bottom: 2rem;
+      transform: translateX(-50%);
+      z-index: 100;
+      padding-bottom: 20px;;
+    }
+
+    .theme-toggle {
+      background-color: var(--button-background);
+      color: var(--button-text-color);
+      border: none;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 5px var(--navbar-glow-color);
+    }
+
+    .theme-toggle:hover {
+      background-color: var(--button-hover);
+      box-shadow: 0 0 5px var(--button-hover);
+    }
+
     .btn:hover {
       color: var(--dracula-background);
       box-shadow: 0 0 20px var(--dracula-cyan);
@@ -260,177 +199,6 @@ const highlightedProjects = allProjects
       font-family: 'VT323', monospace;
     }
 
-    .project-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      padding: 0 1rem;
-    }
-
-    .project-card {
-      background: var(--dracula-background-lighter);
-      border-radius: 1rem;
-      overflow: hidden;
-      text-decoration: none;
-      color: inherit;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .project-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-    }
-
-    .project-img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-    }
-
-    .project-info {
-      padding: 1.5rem;
-    }
-
-    .project-info h3 {
-      color: var(--dracula-cyan);
-      margin-bottom: 0.5rem;
-      font-size: 1.5rem;
-    }
-
-    .project-info p {
-      color: var(--dracula-foreground);
-      line-height: 1.6;
-    }
-
-    .skills-section {
-      padding: 4rem 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 3rem;
-      justify-items: center;
-      text-align: center;
-    }
-
-    .skill-category {
-      padding: 2rem 0;
-    }
-
-    .skill-category h3 {
-      color: var(--dracula-orange);
-      margin-bottom: 1.5rem;
-      font-size: 1.4rem;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-    }
-
-    .skill-category ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .skill-category li {
-      color: var(--dracula-green);
-      margin-bottom: 0.8rem;
-      font-size: 1rem;
-      padding: 0.2rem 0;
-      transition: color 0.2s ease;
-    }
-
-    .skill-category li:hover {
-      color: var(--dracula-cyan);
-    }
-
-    .experience-section {
-      position: relative;
-      padding: 4rem 2rem;
-    }
-
-    .experience-timeline {
-      position: relative;
-      max-width: 800px;
-      margin: 3rem auto 0;
-      padding-left: 2rem;
-    }
-
-    .experience-timeline::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: var(--dracula-comment);
-    }
-
-    .experience-item {
-      position: relative;
-      margin-bottom: 3rem;
-      padding-left: 2rem;
-      transition: transform 0.3s ease;
-    }
-
-    .experience-item:hover {
-      transform: translateX(10px);
-    }
-
-    .experience-marker {
-      position: absolute;
-      left: -2.6rem;
-      top: 0;
-      width: 1rem;
-      height: 1rem;
-      background: var(--dracula-purple);
-      border-radius: 50%;
-      border: 3px solid var(--dracula-background);
-      transition: transform 0.3s ease;
-    }
-
-    .experience-item:hover .experience-marker {
-      transform: scale(1.2);
-      background: var(--dracula-pink);
-    }
-
-    .experience-date {
-      color: var(--dracula-comment);
-      font-size: 0.9rem;
-      margin-bottom: 0.5rem;
-      font-family: 'VT323', monospace;
-    }
-
-    .experience-title {
-      color: var(--dracula-cyan);
-      font-size: 1.3rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .experience-company {
-      color: var(--dracula-orange);
-      margin-bottom: 0.8rem;
-      font-size: 1.1rem;
-    }
-
-    .experience-description {
-      color: var(--dracula-foreground);
-      line-height: 1.6;
-    }
-
-    .fade-on-scroll {
-      opacity: 0.1;
-      transform: translateY(40px);
-      transition: opacity 0.7s, transform 0.7s;
-    }
-
-    .fade-on-scroll.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
     @media (max-width: 768px) {
       .hero-section h1 {
         font-size: 3rem;
@@ -442,35 +210,6 @@ const highlightedProjects = allProjects
         padding: 3rem 1rem;
       }
 
-      .experience-timeline {
-        margin-top: 2rem;
-        padding-left: 1rem;
-      }
-
-      .experience-item {
-        padding-left: 1.5rem;
-      }
-
-      .experience-marker {
-        left: -2.1rem;
-      }
-
-      .skills-section {
-        padding: 2rem 1rem;
-      }
-      
-      .skills-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
-      
-      .skill-category {
-        padding: 1.5rem 0;
-      }
-      
-      .skill-category h3 {
-        font-size: 1.3rem;
-      }
     }
   </style>
 
@@ -511,22 +250,6 @@ const highlightedProjects = allProjects
   }
   
   typeWriter();
-</script>
-
-<script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      } else {
-        entry.target.classList.remove('visible');
-      }
-    });
-  }, { threshold: 0.4 }); // 20% of the section must be visible
-
-  document.querySelectorAll('.fade-on-scroll').forEach(section => {
-    observer.observe(section);
-  });
 </script>
 
 </MainLayout>
