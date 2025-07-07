@@ -10,18 +10,33 @@ const highlightedProjects = allProjects
 ---
 
 <MainLayout>
+  <!-- About -->
+   <section class="section about-section">
+    <h2>Hello there!</h2>
+    <div class="about-flex">
+      <img src="/favicon.svg" alt="Henrik Sedvall" class="about-img" />
+      <div class="about-text">
+        <p>
+          👋🏼 I’m Henrik. I’ve been slinging code and making poor design decisions professionally since 2017.
+        </p>
+      </div>
+    </div>
+   </section>
+   
   <!-- Highlighted Projects -->
-  <section class="section fade-on-scroll">
-    <h2>Featured Projects</h2>
+  <section class="section">
+    <h2>featured</h2>
     <div class="project-grid">
       {highlightedProjects.length === 0 && <p>No highlighted projects yet.</p>}
       {highlightedProjects.map(project => (
         <a href={`/projects/${project.slug}/`} class="project-card">
-          {project.data.heroImg && (
-            <img src={project.data.heroImg} alt={project.data.title} class="project-img" />
-          )}
+          <div class="project-img-wrapper">
+            {project.data.heroImg && (
+              <img src={project.data.heroImg} alt={project.data.title} class="project-img" />
+            )}
+            <div class="project-title-overlay">{project.data.title}</div>
+          </div>
           <div class="project-info">
-            <h3>{project.data.title}</h3>
             <p>{project.data.description}</p>
           </div>
         </a>
@@ -30,8 +45,8 @@ const highlightedProjects = allProjects
   </section>
 
   <!-- Skills -->
-  <section class="section skills-section fade-on-scroll">
-    <h2>Technical Skills</h2>
+  <section class="section skills-section">
+    <h2>skills</h2>
     <div class="skills-grid">
       <div class="skill-category">
         <h3>Game Engines</h3>
@@ -61,14 +76,13 @@ const highlightedProjects = allProjects
   </section>
 
   <!-- Experience Timeline -->
-  <section class="section experience-section fade-on-scroll">
-    <h2>Experience Timeline</h2>
+  <section class="section experience-section">
+    <h2>experience</h2>
     <div class="experience-timeline">
       <div class="experience-item">
-        <div class="experience-marker"></div>
-        <div class="experience-date">2023 - Present</div>
-        <h3 class="experience-title">Senior Game Developer</h3>
-        <div class="experience-company">Pixel Dynamics Studio</div>
+        <div class="experience-date">2025</div>
+        <h3 class="experience-title">Senior Developer</h3>
+        <div class="experience-company">Consid</div>
         <p class="experience-description">
           Leading development of next-generation VR experiences and optimizing game performance across multiple platforms. 
           Mentoring junior developers and establishing best practices.
@@ -76,10 +90,9 @@ const highlightedProjects = allProjects
       </div>
 
       <div class="experience-item">
-        <div class="experience-marker"></div>
-        <div class="experience-date">2021 - 2023</div>
-        <h3 class="experience-title">Game Programmer</h3>
-        <div class="experience-company">Indie Game Collective</div>
+        <div class="experience-date">2023</div>
+        <h3 class="experience-title">AI Programmer</h3>
+        <div class="experience-company">Dimfrost Studio</div>
         <p class="experience-description">
           Developed gameplay systems and implemented AI behaviors for multiple indie titles. 
           Specialized in performance optimization and cross-platform deployment.
@@ -87,10 +100,19 @@ const highlightedProjects = allProjects
       </div>
 
       <div class="experience-item">
-        <div class="experience-marker"></div>
-        <div class="experience-date">2019 - 2021</div>
-        <h3 class="experience-title">Junior Developer</h3>
-        <div class="experience-company">Tech Startup Games</div>
+        <div class="experience-date">2019 - 2024</div>
+        <h3 class="experience-title">Machine Learning Engineer</h3>
+        <div class="experience-company">Advectas / Capgemini</div>
+        <p class="experience-description">
+          Leading development of next-generation VR experiences and optimizing game performance across multiple platforms. 
+          Mentoring junior developers and establishing best practices.
+        </p>
+      </div>
+
+      <div class="experience-item">
+        <div class="experience-date">2017 - 2018</div>
+        <h3 class="experience-title">Software Engineer</h3>
+        <div class="experience-company">Ericsson</div>
         <p class="experience-description">
           Started career working on mobile games and learning industry best practices. 
           Gained experience with agile development and collaborative workflows.
@@ -100,217 +122,152 @@ const highlightedProjects = allProjects
   </section>
 
   <style>
-    .hero-section {
-      min-height: 100vh;
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      padding-top: 15rem;
-      margin-bottom: -40vh;
-      background: linear-gradient(135deg, var(--dracula-background) 0%, #1a1b26 100%);
+    * {
+      margin: 0;
+      padding: 0;
     }
-
-    .hero-content {
-      text-align: center;
-      max-width: 800px;
-      z-index: 2;
-      padding: 0 2rem;
-    }
-
-    .glitch {
-      font-size: 4rem;
-      font-weight: bold;
-      color: var(--dracula-cyan);
-      position: relative;
-      margin-bottom: 20px;
-      font-family: 'VT323', monospace;
-      animation: glitch 2s infinite;
-    }
-
-    @keyframes glitch {
-      0%, 100% { transform: translate(0); }
-      20% { transform: translate(-2px, 2px); }
-      40% { transform: translate(-2px, -2px); }
-      60% { transform: translate(2px, 2px); }
-      80% { transform: translate(2px, -2px); }
-    }
-
-    .glitch::before,
-    .glitch::after {
-      content: attr(data-text);
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
-
-    .glitch::before {
-      animation: glitch-1 0.5s infinite;
-      color: var(--dracula-pink);
-      z-index: -1;
-    }
-
-    .glitch::after {
-      animation: glitch-2 0.5s infinite;
-      color: var(--dracula-purple);
-      z-index: -2;
-    }
-
-    @keyframes glitch-1 {
-      0%, 100% { transform: translate(0); }
-      20% { transform: translate(-2px, 2px); }
-      40% { transform: translate(-2px, -2px); }
-      60% { transform: translate(2px, 2px); }
-      80% { transform: translate(2px, -2px); }
-    }
-
-    @keyframes glitch-2 {
-      0%, 100% { transform: translate(0); }
-      20% { transform: translate(2px, -2px); }
-      40% { transform: translate(2px, 2px); }
-      60% { transform: translate(-2px, -2px); }
-      80% { transform: translate(-2px, 2px); }
-    }
-
-    .typing-animation {
-      font-size: 1.5rem;
-      color: var(--dracula-green);
-      margin-bottom: 30px;
-      min-height: 2em;
-      font-family: 'Fira Code', monospace;
-    }
-
-    .cursor {
-      animation: blink 1s infinite;
-    }
-
-    @keyframes blink {
-      0%, 50% { opacity: 1; }
-      51%, 100% { opacity: 0; }
-    }
-
-    .cta-buttons {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 30px;
-    }
-
-    .btn {
-      padding: 12px 24px;
-      background: transparent;
-      border: 2px solid var(--dracula-cyan);
-      color: var(--dracula-cyan);
-      text-decoration: none;
-      font-family: 'Fira Code', monospace;
-      font-size: 16px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .btn:hover {
-      color: var(--dracula-background);
-      box-shadow: 0 0 20px var(--dracula-cyan);
-    }
-
-    .btn::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: var(--dracula-cyan);
-      transition: left 0.3s ease;
-      z-index: -1;
-    }
-
-    .btn:hover::before {
-      left: 0;
-    }
-
+    
     .section {
-      padding: 4rem 2rem;
+      padding: 0rem 1rem 1rem;
       max-width: 1200px;
-      margin: 0 auto;
+      margin: 0 auto 1rem auto;
+      border: 2px solid var(--dracula-green);
+      border-radius: 0.05rem;
+      background: var(--background-color);
+      /* Add a glow to the border dots: */
+      box-shadow:
+        0 0 2px 0px var(--dracula-green), /* Outer glow */
+        0 2px 2px rgba(0,0,0,0.04);
     }
 
     .section h2 {
-      font-size: 2.5rem;
-      color: var(--dracula-purple);
+      font-size: 40px;
+      color: var(--navbar-glow-color);
       text-align: center;
-      margin-bottom: 3rem;
-      font-family: 'VT323', monospace;
+      margin-bottom: 0.5rem;
+      font-family: 'VT323'; /* Already matches */
+      text-shadow: 
+        0px 0px 3px var(--navbar-glow-color), 
+        0px 0px 3px var(--navbar-glow-color); 
+      font-weight: normal; 
+      letter-spacing: normal;
+      border-bottom: dotted 4px;
+    }
+
+    .about-flex {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .about-img {
+      width: 160px;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 50%;
+      box-shadow: 0 0 12px var(--dracula-green, #50fa7b);
+      flex-shrink: 0;
+      margin-top: 1.0rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .about-text {
+      flex: 1;
     }
 
     .project-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      padding: 0 1rem;
+      gap: 1rem;
+      padding: 1rem 0 0 0;
     }
 
     .project-card {
-      background: var(--dracula-background-lighter);
-      border-radius: 1rem;
+      background: var(--dracula-background);
+      border-radius: 0.2rem;
       overflow: hidden;
       text-decoration: none;
       color: inherit;
-      transition: transform 0.2s, box-shadow 0.2s;
     }
 
     .project-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      background: var(--dracula-pink);
+    }
+
+    .project-img-wrapper {
+      position: relative;
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
     }
 
     .project-img {
       width: 100%;
-      height: 200px;
+      height: 100%;
       object-fit: cover;
+      filter: blur(6px);
+      transition: filter 0.0s;
+    }
+
+    .project-card:hover .project-img {
+      filter: blur(0);
+    }
+
+    .project-title-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: var(--dracula-orange);
+      font-family: 'VT323', monospace;
+      font-size: 2.8rem; /* Larger title */
+      text-shadow: 0 0 8px var(--dracula-background), 0 0 3px var(--navbar-glow-color);
+      z-index: 2;
+      pointer-events: none;
+      text-align: center;
+      width: 90%;
+      white-space: pre-line;
+      transition: opacity 0.3s;
+      opacity: 1;
+    }
+
+    .project-card:hover .project-title-overlay {
+      opacity: 0; /* Hide title on hover */
     }
 
     .project-info {
       padding: 1.5rem;
-    }
-
-    .project-info h3 {
-      color: var(--dracula-cyan);
-      margin-bottom: 0.5rem;
-      font-size: 1.5rem;
+      border: 1.5px solid var(--dracula-foreground);
     }
 
     .project-info p {
-      color: var(--dracula-foreground);
       line-height: 1.6;
     }
 
     .skills-section {
-      padding: 4rem 2rem;
+      padding: 0rem 1rem 1rem;
       max-width: 1200px;
-      margin: 0 auto;
+      margin: 1rem auto;
     }
 
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 3rem;
-      justify-items: center;
+      justify-items: stretch;
       text-align: center;
     }
 
     .skill-category {
-      padding: 2rem 0;
+      padding: 0.5rem 0;
+
     }
 
     .skill-category h3 {
-      color: var(--dracula-orange);
-      margin-bottom: 1.5rem;
-      font-size: 1.4rem;
+      color: var(--dracula-cyan);
+      margin-bottom: 0.5rem;
+      font-size: 1.3rem;
       font-weight: 600;
       letter-spacing: 0.5px;
     }
@@ -322,70 +279,49 @@ const highlightedProjects = allProjects
     }
 
     .skill-category li {
-      color: var(--dracula-green);
-      margin-bottom: 0.8rem;
+      display: inline-block;
+      background: transparent; /* fallback if custom property missing */
+      border: 1.5px solid var(--dracula-foreground);
+      color: var(--dracula-foreground);
+      padding: 0.3em 1em;
+      margin: 0.2em 0.3em;
+      border-radius: 0.5em;
       font-size: 1rem;
-      padding: 0.2rem 0;
-      transition: color 0.2s ease;
+      font-family: inherit;
+      transition: background 0.2s, color 0.2s;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
     }
 
     .skill-category li:hover {
-      color: var(--dracula-cyan);
+      background: var(--dracula-pink, #ff79c6);
+      color: #fff;
     }
 
     .experience-section {
       position: relative;
-      padding: 4rem 2rem;
+      padding: 0rem 1rem 1rem;
     }
 
     .experience-timeline {
       position: relative;
       max-width: 800px;
-      margin: 3rem auto 0;
-      padding-left: 2rem;
-    }
-
-    .experience-timeline::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: var(--dracula-comment);
+      margin: 2rem auto 0;
     }
 
     .experience-item {
       position: relative;
-      margin-bottom: 3rem;
-      padding-left: 2rem;
+      margin-bottom: 2rem;
+      padding: 0rem 1.5rem 0rem 2.5rem;
       transition: transform 0.3s ease;
     }
 
     .experience-item:hover {
-      transform: translateX(10px);
-    }
-
-    .experience-marker {
-      position: absolute;
-      left: -2.6rem;
-      top: 0;
-      width: 1rem;
-      height: 1rem;
-      background: var(--dracula-purple);
-      border-radius: 50%;
-      border: 3px solid var(--dracula-background);
-      transition: transform 0.3s ease;
-    }
-
-    .experience-item:hover .experience-marker {
-      transform: scale(1.2);
-      background: var(--dracula-pink);
+      transform: translateX(2px);
     }
 
     .experience-date {
       color: var(--dracula-comment);
-      font-size: 0.9rem;
+      font-size: 1.2rem;
       margin-bottom: 0.5rem;
       font-family: 'VT323', monospace;
     }
@@ -403,19 +339,20 @@ const highlightedProjects = allProjects
     }
 
     .experience-description {
-      color: var(--dracula-foreground);
       line-height: 1.6;
     }
 
     @media (max-width: 768px) {
-      .hero-section h1 {
-        font-size: 3rem;
-      }
-      .hero-text {
-        font-size: 1.2rem;
-      }
       .section {
-        padding: 3rem 1rem;
+        padding: 0rem 1rem 1rem;
+      }
+
+      .about-flex {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin-top: 1.0rem;
+        margin-bottom: 0.5rem;
       }
 
       .experience-timeline {
@@ -432,20 +369,18 @@ const highlightedProjects = allProjects
       }
 
       .skills-section {
-        padding: 2rem 1rem;
+        padding: 0rem 1rem 1rem;
       }
       
       .skills-grid {
         grid-template-columns: 1fr;
-        gap: 2rem;
+        text-align: center;
+        justify-items: stretch;
+        justify-content: center;
       }
       
       .skill-category {
-        padding: 1.5rem 0;
-      }
-      
-      .skill-category h3 {
-        font-size: 1.3rem;
+        padding: 1rem;
       }
     }
   </style>

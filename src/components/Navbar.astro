@@ -1,9 +1,9 @@
 ---
 const links = [
-  { href: "/home", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/blog", label: "Blog" },
-  { href: "/projects", label: "Projects" },
+  { href: "/home", label: "HOME" },
+  { href: "/about", label: "ABOUT" },
+  { href: "/blog", label: "BLOG" },
+  { href: "/projects", label: "PROJECTS" },
 ];
 
 ---
@@ -150,7 +150,7 @@ const links = [
       top: 80px;
       left: 0;
       right: 0;
-      background: var(--navbar-background, #222);
+      background: var(--navbar-background);
       flex-direction: column;
       gap: 1rem;
       padding: 1rem 0;
@@ -161,6 +161,9 @@ const links = [
     
     .navbar-links.open {
       display: flex;
+      border: 2px solid var(--dracula-green);
+      border-radius: 0.5rem;
+      box-shadow: 0 0 2px var(--navbar-glow-color);
     }
     
     .hamburger {
