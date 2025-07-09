@@ -7,6 +7,10 @@ const projects = (await getCollection('projects')).sort(
   (a, b) => b.data.startDate.valueOf() - a.data.startDate.valueOf()
 );
 ---
+<head>
+  <title>Projects | Henrik Sedvall</title>
+</head> 
+
 <MainLayout>
   <ul class="project-list">
     {projects.map(project => (

@@ -8,6 +8,9 @@ const highlightedProjects = allProjects
   .sort((a, b) => b.data.startDate.valueOf() - a.data.startDate.valueOf())
   .slice(0, 3);
 ---
+<head>
+  <title>Home | Henrik Sedvall</title>
+</head> 
 
 <MainLayout>
   <!-- About -->
@@ -344,8 +347,9 @@ const highlightedProjects = allProjects
 
     @media (max-width: 768px) {
       .section {
-        padding: 0rem 0.5rem 0.0rem 0.5rem;
+        padding: 0rem 0.5rem 0rem 0.5rem;
         margin: 0 auto 1rem auto;
+        padding-bottom: 0.5rem
       }
 
       .about-flex {

@@ -19,6 +19,11 @@ if (!project) {
 
 const { Content } = await project.render();
 ---
+<head>
+  <title>{project.data.title} | Henrik Sedvall</title>
+  <meta name="description" content={project.data.description} />
+</head>
+
 <Project 
   title={project.data.title}
   startDate={project.data.startDate}

@@ -8,6 +8,9 @@ const links = [
 
 ---
 <nav class="navbar">
+  <div class="navbar-brand">
+    <a href="/home" class="navbar-title">HS</a>
+  </div>
   <button class="hamburger" id="hamburger-btn" aria-label="Open menu">
     &#9776;
   </button>
@@ -17,8 +20,10 @@ const links = [
         <a href={link.href}>{link.label}</a>
       </li>
     ))}
+    <li class="theme-toggle-mobile">
+      <button id="theme-toggle" class="theme-toggle">!</button>
+    </li>
   </ul>
-  <button id="theme-toggle" class="theme-toggle">!</button>
 </nav>
 
 <script>
