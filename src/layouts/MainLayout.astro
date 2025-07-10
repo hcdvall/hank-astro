@@ -28,8 +28,16 @@ const { showNavbar = true, showFooter = true } = Astro.props;
 
 <style>
   @font-face {
-    font-family: 'GoodOldDOS';
-    src: url('/fonts/Good Old DOS.ttf') format('truetype');
+    font-family: 'Pacifico';
+    src: url('/fonts/Pacifico-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Loopet';
+    src: url('/fonts/PlaywriteDKLoopet-VariableFont_wght.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -58,6 +66,15 @@ const { showNavbar = true, showFooter = true } = Astro.props;
     --dracula-yellow: #f1fa8c;
     --dracula-yellow-lighter: #fcffc0;
     --dracula-blue: #6272a4;
+
+    --the-white:#F2F2F2;
+    --the-grey:#EAE4D5;
+    --the-beige:#B6B09F;
+    --the-black:#131313;
+    --the-accent:#ff79c6;
+    --the-yellow:#fcffc0;
+
+    --header-font: 'PressStart2P', monospace;
   }
 
   body {
@@ -66,7 +83,7 @@ const { showNavbar = true, showFooter = true } = Astro.props;
     line-height: 1.6;
 
     /* Default theme variables (dark theme) */
-    --background-color: var(--dracula-background-darker);
+    /* --background-color: var(--dracula-background-darker);
     --navbar-background: var(--dracula-background-darker);
     --footer-background: var(--dracula-background-darker);
     --text-color: var(--dracula-foreground);
@@ -76,11 +93,33 @@ const { showNavbar = true, showFooter = true } = Astro.props;
     --button-hover: var(--dracula-pink);
     --button-text-color: #ffffff;
     --markdown-header-color: var(--dracula-yellow);
+    --content-border-color: var(--dracula-green);
+    --project-card-hover: var(--dracula-pink); */
+
+    --background-color: var(--the-black);
+    --navbar-background: var(--the-black);
+    --footer-background: var(--the-black);
+    --text-color: var(--the-white);
+    --navbar-text-color: var(--the-white);
+    --navbar-glow-color: none;
+    --button-background: var(--the-white);
+    --button-hover: var(--the-accent);
+    --button-text-color: var(--the-beige);
+    --markdown-header-color: var(--the-white);
+    
+    /* HOME */
+    --content-border-color: var(--the-white);
+    --card-project-hover: var(--the-accent);
+    --card-project-title: var(--the-accent);
+    --card-project-border: var(--the-white);
+    --experience-date: var(--the-grey);
+    --experience-title: var(--the-white);
+    --experience-company: var(--the-accent);
   }
 
   /* Light theme overrides */
   body[data-theme="light"] {
-    --background-color: var(--dracula-yellow-lighter);
+    /* --background-color: var(--dracula-yellow-lighter);
     --navbar-background: var(--dracula-yellow-lighter);
     --footer-background: var(--dracula-yellow-lighter);
     --text-color: #var(var(--dracula-background));
@@ -90,6 +129,29 @@ const { showNavbar = true, showFooter = true } = Astro.props;
     --button-hover: var(--dracula-green);
     --button-text-color: #ffffff;
     --markdown-header-color: var(--dracula-purple);
+    --content-border-color: var(--dracula-pink);
+    --project-card-hover: var(--dracula-green); */
+
+    --background-color: var(--the-white);
+    --navbar-background: var(--the-white);
+    --footer-background: var(--the-white);
+    --text-color: var(--the-black);
+    --navbar-text-color: var(--the-black);
+    --navbar-glow-color: var(--the-black);
+    --button-background: var(--the-black);
+    --button-hover: var(--the-accent);
+    --button-text-color: var(--the-beige);
+    --markdown-header-color: var(--the-black);
+    /* HOME */
+    --content-border-color: var(--the-black);
+    --card-project-hover: var(--the-accent);
+    --card-project-title: var(--the-accent);
+    --card-project-border: var(--the-black);
+    --experience-date: var(--the-beige);
+    --experience-title: var(--the-black);
+    --experience-company: var(--the-accent);
+
+    
   }
 
   /* Apply variables to the body */

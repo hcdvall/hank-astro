@@ -20,7 +20,7 @@ const highlightedProjects = allProjects
       <img src="/favicon.svg" alt="Henrik Sedvall" class="about-img" />
       <div class="about-text">
         <p>
-          👋🏼 I’m Henrik. I’ve been slinging code and making poor design decisions professionally since 2017.
+          I'm Henrik. I've been slinging code and making poor design decisions professionally since 2017.
         </p>
       </div>
     </div>
@@ -134,21 +134,21 @@ const highlightedProjects = allProjects
       padding: 0rem 1rem 1rem;
       max-width: 1200px;
       margin: 0 auto 1rem auto;
-      border: 2px solid var(--dracula-green);
+      border: 2px solid var(--content-border-color);
       border-radius: 0.05rem;
       background: var(--background-color);
       /* Add a glow to the border dots: */
       box-shadow:
-        0 0 2px 0px var(--dracula-green), /* Outer glow */
+        0 0 2px 0px var(--content-border-color), /* Outer glow */
         0 2px 2px rgba(0,0,0,0.04);
     }
 
     .section h2 {
-      font-size: 40px;
+      font-size: 30px;
       color: var(--navbar-glow-color);
       text-align: center;
       margin-bottom: 0.5rem;
-      font-family: 'VT323'; /* Already matches */
+      font-family: var(--header-font);
       text-shadow: 
         0px 0px 3px var(--navbar-glow-color), 
         0px 0px 3px var(--navbar-glow-color); 
@@ -168,7 +168,8 @@ const highlightedProjects = allProjects
       height: 160px;
       object-fit: cover;
       border-radius: 50%;
-      box-shadow: 0 0 12px var(--dracula-green, #50fa7b);
+      border: 2px solid var(--content-border-color);
+      box-shadow: 0 0 2px var(--content-border-color, #50fa7b);
       flex-shrink: 0;
       margin-top: 1.0rem;
       margin-bottom: 0.5rem;
@@ -186,7 +187,7 @@ const highlightedProjects = allProjects
     }
 
     .project-card {
-      background: var(--dracula-background);
+      background: var(--background-color);
       border-radius: 0.2rem;
       overflow: hidden;
       text-decoration: none;
@@ -196,7 +197,7 @@ const highlightedProjects = allProjects
     .project-card:hover {
       
       box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-      background: var(--dracula-pink);
+      background: var(--card-project-hover);
     }
 
     .project-img-wrapper {
@@ -223,10 +224,9 @@ const highlightedProjects = allProjects
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      color: var(--dracula-orange);
-      font-family: 'VT323', monospace;
-      font-size: 2.8rem; /* Larger title */
-      text-shadow: 0 0 8px var(--dracula-background), 0 0 3px var(--navbar-glow-color);
+      color: var(--card-project-title);
+      font-family: 'VT323';
+      font-size: 2.8rem;
       z-index: 2;
       pointer-events: none;
       text-align: center;
@@ -242,7 +242,7 @@ const highlightedProjects = allProjects
 
     .project-info {
       padding: 1.5rem;
-      border: 1.5px solid var(--dracula-foreground);
+      border: 1.5px solid var(--card-project-border);
     }
 
     .project-info p {
@@ -268,7 +268,7 @@ const highlightedProjects = allProjects
     }
 
     .skill-category h3 {
-      color: var(--dracula-cyan);
+      color: var(--text-color);
       margin-bottom: 0.5rem;
       font-size: 1.3rem;
       font-weight: 600;
@@ -284,8 +284,8 @@ const highlightedProjects = allProjects
     .skill-category li {
       display: inline-block;
       background: transparent; /* fallback if custom property missing */
-      border: 1.5px solid var(--dracula-foreground);
-      color: var(--dracula-foreground);
+      border: 1.5px solid var(--text-color);
+      color: var(--text-color);
       padding: 0.3em 1em;
       margin: 0.2em 0.3em;
       border-radius: 0.5em;
@@ -296,8 +296,7 @@ const highlightedProjects = allProjects
     }
 
     .skill-category li:hover {
-      background: var(--dracula-pink, #ff79c6);
-      color: #fff;
+      background: var(--button-hover);
     }
 
     .experience-section {
@@ -323,20 +322,20 @@ const highlightedProjects = allProjects
     }
 
     .experience-date {
-      color: var(--dracula-comment);
+      color: var(--experience-date);
       font-size: 1.2rem;
       margin-bottom: 0.5rem;
       font-family: 'VT323', monospace;
     }
 
     .experience-title {
-      color: var(--dracula-cyan);
+      color: var(--experience-title);
       font-size: 1.3rem;
       margin-bottom: 0.5rem;
     }
 
     .experience-company {
-      color: var(--dracula-orange);
+      color: var(--experience-company);
       margin-bottom: 0.8rem;
       font-size: 1.1rem;
     }
