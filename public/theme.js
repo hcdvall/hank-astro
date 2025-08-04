@@ -9,15 +9,21 @@ function getSavedTheme() {
 
 function setupThemeToggle() {
   setTheme(getSavedTheme());
-  const btn = document.getElementById("theme-toggle");
-  if (btn && !btn.dataset.listener) {
-    btn.addEventListener("click", () => {
-      const currentTheme = document.body.getAttribute("data-theme");
-      const newTheme = currentTheme === "dark" ? "light" : "dark";
-      setTheme(newTheme);
-    });
-    btn.dataset.listener = "true"; // Prevent double listeners
-  }
+  
+  // Handle multiple theme toggle button IDs
+  const themeToggleIds = ["theme-toggle", "theme-toggle-mobile", "theme-toggle-desktop"];
+  
+  themeToggleIds.forEach(id => {
+    const btn = document.getElementById(id);
+    if (btn && !btn.dataset.listener) {
+      btn.addEventListener("click", () => {
+        const currentTheme = document.body.getAttribute("data-theme");
+        const newTheme = currentTheme === "dark" ? "light" : "dark";
+        setTheme(newTheme);
+      });
+      btn.dataset.listener = "true"; // Prevent double listeners
+    }
+  });
 }
 
 // Run on initial load
@@ -29,3 +35,4 @@ if (document.readyState === "loading") {
 
 // Re-run after Astro client navigation
 document.addEventListener("astro:after-swap", setupThemeToggle);
+document.addEventListener("astro:page-load", setupThemeToggle);
