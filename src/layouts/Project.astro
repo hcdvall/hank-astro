@@ -8,8 +8,8 @@ const { title, startDate, description, author, heroImg, highlight} = Astro.props
     <header class="project-header">
       <div class="hero-img-container">
         <img src={heroImg} class="hero-img" alt={title} />
-        <div class="hero-title">{title}</div>
       </div>
+      <div class="hero-title">{title}</div>
     </header>
 
     <section class="project-content">
@@ -29,8 +29,8 @@ const { title, startDate, description, author, heroImg, highlight} = Astro.props
 
   <style>
     .project {
-      max-width: 1200px;
-      margin: 0;
+      max-width: 900px;
+      margin: 0 auto;
       padding: 0px;
     }
 
@@ -59,9 +59,12 @@ const { title, startDate, description, author, heroImg, highlight} = Astro.props
     }
 
     .project-content {
+      max-width: 900px;
+      margin: 0 auto;
       line-height: 1.6;
       font-size: 1em;
     }
+
     /* hero image styling */
     .hero-img-container {
       position: relative;
@@ -79,12 +82,13 @@ const { title, startDate, description, author, heroImg, highlight} = Astro.props
       display: block;
       border-radius: 0.5rem;
       box-shadow: 0 2px 12px 0 rgba(0,0,0,0.10);
+      position: relative;
     }
     .hero-title {
       position: absolute;
-      top: 50%;
+      top: 2rem;
       left: 50%;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%, 25%);
       color: var(--dracula-orange);
       padding: 0.5em 1em;
       border-radius: 0.5em;
@@ -93,34 +97,46 @@ const { title, startDate, description, author, heroImg, highlight} = Astro.props
       font-family: "VT323", monospace;
       text-shadow: 0 2px 8px #000;
       pointer-events: none;
+      white-space: nowrap;
     }
 
     /* Markdown Content Styling */
+    :global(.project-content h1),
+    :global(.project-content h2),
+    :global(.project-content h3),
+    :global(.project-content h4) {
+      font-family: 'VT323', monospace;
+      font-weight: lighter;
+      text-shadow: 
+        0px 0px 0px var(--markdown-header-color), 
+        0px 0px 0px var(--markdown-header-color);
+    }
+
     :global(.project-content h1) {
-      font-size: 2.0em;
+      font-size: calc(var(--heading-base, 1.1rem) * 2.5);
       margin: 2rem 0 1rem 0;
       line-height: 1.2;
       padding-bottom: 0.5rem;
       font-weight: normal;
-      color: var(--markdown-header-color)
+      color: var(--markdown-header-color);
     }
 
     :global(.project-content h2) {
-      font-size: 1.7em;
+      font-size: calc(var(--heading-base, 1.1rem) * 2);
       color: var(--markdown-header-color);
       margin: 1.8rem 0 1rem 0;
       line-height: 1.3;
     }
 
     :global(.project-content h3) {
-      font-size: 1.5em;
+      font-size: calc(var(--heading-base, 1.1rem) * 1.5);
       color: var(--markdown-header-color);
       margin: 1.5rem 0 0.8rem 0;
       line-height: 1.4;
     }
 
     :global(.project-content h4) {
-      font-size: 1.2em;
+      font-size: calc(var(--heading-base, 1.1rem) * 1.2);
       color: var(--markdown-header-color);
       margin: 1.2rem 0 0.6rem 0;
     }
@@ -194,18 +210,35 @@ const { title, startDate, description, author, heroImg, highlight} = Astro.props
       text-shadow: 
         0px 
         0px 
-        3px 
+        0px 
         var(--markdown-header-color), 
         0px 
         0px 
-        3px 
+        0px 
         var(--markdown-header-color);
     }
 
-    @media (max-width: 700px) {
+    :global(.project-content img) {
+      width: 350px;           /* Default size */
+      max-width: 100%;        /* Shrink to fit container */
+      height: 300px;          /* Keep aspect ratio when shrinking */
+      object-fit: cover;
+      border-radius: 0.5rem;
+      margin: 1rem auto;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      display: inline-flex; 
+    }
+
+    @media (max-width: 900px) {
       .project {
         padding: 0rem 1.0rem;
 
+      }
+
+      :global(.project-content img) {
+        width: 100%;          /* Full width on small screens */
+        height: auto;         /* Maintain aspect ratio */
+        margin: 1rem auto 0.5rem auto; /* Use margin-top instead of padding-top */
       }
     }
 

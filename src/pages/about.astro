@@ -6,85 +6,197 @@ import MainLayout from '../layouts/MainLayout.astro';
 </head> 
 
 <MainLayout>
-  <section class="about-container">
-    <h1 class="about-title">👋 About Me</h1>
-    <div class="about-content">
-      <img src="/images/avatar.png" alt="Avatar" class="about-avatar" />
-      <div>
-        <p>
-          Hi! I'm Henrik Sedvall, a passionate game developer and programmer with a love for physics-based gameplay, creative problem-solving, and pixel-perfect design.
-        </p>
-        <p>
-          I enjoy building interactive experiences, exploring new technologies, and sharing knowledge through blog posts and open source projects.
-        </p>
-        <ul class="about-list">
-          <li>🎮 Gameplay & Systems Programming</li>
-          <li>🧩 Puzzle & Platformer Design</li>
-          <li>💡 Physics, AI, and Scripting</li>
-          <li>🌈 Pixel Art & Visual Effects</li>
-          <li>🚀 Always learning something new!</li>
-        </ul>
-        <p>
-          When I'm not coding, you'll find me hiking, playing indie games, or tinkering with retro tech.
-        </p>
+  <div class="about-container">
+    <!-- About Me -->
+    <section class="content-section about-with-image">
+      
+      <div class="about-flex">
+        <img src="/public/images/Henrik_2023.JPG" alt="Henrik Sedvall" class="profile-image" />
+        <div class="about-text">
+          <p>
+            Hello, I am Henrik! I'm a reasonably funny, cool-headed dad and husband enjoying life in Dalarna - the heart and soul of Sweden. 
+            By day, I work as a software engineer with a spicy flavor of machine learning and a texture of data. By night, I sleep.
+          </p>
+        </div>
+        
       </div>
-    </div>
-  </section>
+    </section>
+
+    <!-- Experience -->
+    <section class="content-section">
+      <h2>What and Where</h2>
+      <p>
+        For the past eight years, I've been building software, data and machine learning solutions across a wide range of industries. 
+      
+        Projects I've delivered include:
+      </p>
+      
+      <div class="job-grid">
+        <div class="job-item">Ericsson - telecommunication systems</div>
+        <div class="job-item">Volvo Cars - computer vision in manufacturing</div>
+        <div class="job-item">Ziklo Bank - customer analytics in fintech</div>
+        <div class="job-item">FirstVet - natural language processing for veterinarians</div>
+        <div class="job-item">Maximum Entertainment - AI-driven wildlife NPCs in games</div>
+      </div>
+
+      <p>
+        My work has ranged from hands-on coding to leading teams and architecting complete solutions. 
+        In recent years, I've stepped into Tech Lead roles - shaping systems, tailoring teams and even taking responsibility for technical recruiting.
+        <br/><br/>
+        I'm passionate about work processes - how to build and work efficiently in a team and facilitating productive discussions about different views and thoughts.
+      </p>
+    </section>
+
+    <!-- This Website -->
+    <section class="content-section">
+      <h2>This Website</h2>
+      <p>
+        This website is my digital playground where I showcase projects, share development insights and document my journey as a creator. 
+        <br/><br/>
+        Here you'll find project devlogs, tutorials I've written for myself (and anyone else who finds them useful) and occasional musings on work culture, team dynamics and the industries I've been part of—all with a focus on tech and a dash of humor.
+      </p>
+    </section>
+
+    <!-- Personal -->
+    <section class="content-section">
+      <h2>The Free Time Chores</h2>
+      <p>
+        In my spare time, I keep busy maintaining our house and yard, roaming the outdoors with my dog and occasionally fishing. 
+        I also enjoy delving into DnD sessions with my party, plucking away at my guitar and (less frequently than I should) moving some weights at the gym.
+        <br/><br/>
+        In between everything else, I contribute to open-source game projects like Dev Pods or tinker with my own ideas - usually related to gamedev and machine learning.
+        Did I mention that I am reasonably funny? Well, you can find some of my best jokes here: <a href="https://github.com/hcdvall" target="_blank" rel="noopener">GitHub</a>.  
+      </p>
+    </section>
+
+  </div>
+
   <style>
-    .about-container {
-      max-width: 800px;
-      margin: 3rem auto;
-      padding: 2rem 1.5rem;
-      background: var(--dracula-background-lighter, #282a36);
-      border-radius: 1rem;
-      box-shadow: 0 4px 24px 0 rgba(0,0,0,0.15);
-      font-family: 'Fira Code', monospace;
-    }
-    .about-title {
-      font-size: 2.5rem;
-      color: var(--dracula-pink, #ff79c6);
-      text-align: center;
-      margin-bottom: 2rem;
-      font-family: 'GoodOldDOS', monospace;
-      text-shadow: 0 2px 8px #000;
-    }
-    .about-content {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      align-items: flex-start;
-    }
-    .about-avatar {
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
+    .profile-image {
+      width: 270px;
+      height: 270px;
+      border-radius: 20%;
       object-fit: cover;
-      box-shadow: 0 2px 12px 0 rgba(0,0,0,0.10);
-      border: 3px solid var(--dracula-pink, #ff79c6);
-      background: #222;
+      border: 3px solid var(--content-border-color);
+      flex-shrink: 0;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      margin: 0.5rem 0;
+      color: var(--navbar-glow-color, #50fa7b);
+    }
+
+    .tagline {
+      font-size: 1.2rem;
+      color: var(--text-muted, #999);
+      margin: 0;
+    }
+
+    /* Content Sections */
+    .content-section {
+      margin-top: 1.0rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .content-section h2 {
+      font-size: 1.5rem;
+      color: var(--navbar-glow-color, #50fa7b);
+      margin-bottom: -0.7rem;    /* Less space */
+      font-family: var(--header-font);
+      font-size: var(--header-font-size)
+    }
+
+    .content-section p {
+      font-size: 1.1rem;
       margin-bottom: 1rem;
     }
-    .about-content > div {
-      flex: 1 1 250px;
+
+    .about-flex {
+      display: flex;
+      align-items: flex-start;
+      gap: 2rem;
+      margin-top: 1rem;
     }
-    .about-list {
-      margin: 1.5rem 0;
-      padding-left: 1.5rem;
-      list-style: square;
-      color: var(--dracula-green, #50fa7b);
-      font-size: 1.1em;
+
+    .about-text {
+      flex: 1;
     }
-    .about-list li {
-      margin-bottom: 0.5em;
+
+    .about-text p {
+      margin: 0;
+      font-size: 1.5rem;
     }
-    @media (max-width: 600px) {
-      .about-content {
+
+    /* Skills Grid */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .skill-item {
+      padding: 0.75rem;
+      background: var(--background-secondary, rgba(255,255,255,0.05));
+      border-radius: 0.5rem;
+      font-size: 1rem;
+    }
+
+    .job-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+      margin-left: 1.2rem; /* Slight indent */
+      padding: 0.2rem 0.5rem;
+      background: none;
+      border: none;
+      box-shadow: none;
+    }
+
+    .job-item {
+      padding: 0.2rem 0.5rem;
+      border-radius: 0;
+      font-size: 1.2rem;
+      color: var(--the-accent);
+      margin-bottom: 0.1rem;
+      box-shadow: none;
+      transition: none;
+    }
+
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .about-container {
+        padding: 1rem 0.5rem;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .about-flex {
         flex-direction: column;
         align-items: center;
+        
+        gap: 1.5rem;
       }
-      .about-avatar {
-        margin-bottom: 1.5rem;
+
+      .about-text p {
+        margin: 0;
+        font-size: 1.2rem;
+        font-weight: 800;
       }
+
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-image {
+        width: 95%;
+        height: 95%;
+      }
+
     }
   </style>
 </MainLayout>
