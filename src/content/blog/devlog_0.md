@@ -18,11 +18,68 @@ However, I then found it even more tedious to upload the build to someplace and 
 
 I finally ended up with a solution where I uses docker compose to handle Jenkins, where Jenkins listens to pushes or manual triggered builds and runs a bashscript. Jenkins forwards build results to a discord server and the Jenkins dashboard lives on my personal website for anyone to witness (as long as I have my computer on and runs the docker instance). I also setup login credentials for myself so only I can mess around with the build system.
 
-## The bash-script
+## The build-script 
 
+**Flexible Configuration:** The script uses a `build.config` file that specifies where Unreal Engine is installed. This is somewhat important because the path differs between environments. Jenkins runs inside a Docker container where the engine lives at /workspace/UnrealEngine, while local builds point directly to e.g. /home/user/Dev/UnrealEngine. By externalizing this configuration, the same script works everywhere!
+
+**Version Tracking:** Each build is automatically tagged with a timestamp and git commit hash, creating unique identifiers like *Development_20260226_120238_a3f2c1b*. This makes it easier to trace any build back to the exact code that produced it.
+
+**Logging:** All output is piped to `build_log.txt` using tee, so I can see the build progress in real-time while keeping record. When builds fail (which they almost never do of course shut up mind you), these logs simplifies debugging.
+### The Core Logic
+
+The script generates a unique version for each build:
+```bash
+# Combine timestamp with git commit hash for unique versioning
+VERSION=$(date +"%Y%m%d_%H%M%S")
+GIT_HASH=$(git rev-parse --short HEAD)
+# Result: 20260226_120238_a3f2c1b
+```
+
+Then calls Unreals automation tool with the right flags:
+```bash
+"$ENGINE_PATH/Engine/Build/BatchFiles/RunUAT.sh" BuildCookRun \
+    -project="$PROJECT_ROOT/$PROJECT_NAME.uproject" \
+    -platform=Linux \
+    -clientconfig=Development \
+    -cook -build -stage -pak -archive
+```
+This single command compiles the code, cooks the assets, stages the files, and packages everything into a distributable build. The script also creates a latest symlink that always points to the most recent build, making it easier to locate the current version.
+
+
+**[View build.sh on GitHub](https://github.com/hcdvall/mp-fog-job/blob/main/build.sh)**
 
 ## Docker
+So why did I containerize docker? Well, I had major issues with file permission when I drank Jenkins straight from the bottle. In attempt to circumvent the permission conundrum I thought containerization with docker might help.
 
+### The problem
+**Multiple Write Locations:** UE5 writes to many directories during builds, such as `Intermediate/`, `DerivedDataCache/`, `Saved/`, `Binaries/`. When both my user and Jenkins tried to access these folders, permission conflicts occured because neither can modify files created by the other.
+
+**Zen Server Conflicts:** Zen is apparently UE5s derived data cache server that stores processed assets (textures, shaders, etc.) to speed up builds. It uses shared memory (/dev/shm) for fast inter-process communication. When my local builds and Jenkins both tried to access the same shared memory objects, I got "Permission denied" errors and cooking failures.
+
+**Reproducibility:** Without isolation, builds were not consistent. Leftover files and environment differences could mean a successful build on my machine but a f-up in Jenkins.
+
+### The solution
+
+**Separate Filesystems:** Inside the Docker container, Jenkins has its own complete filesystem. When it writes to `/workspace/MP_FogJob/Intermediate/`, it is writing to the containers filesystem, not directly to my home directory.
+
+**Volume Mounts** let the container access my project files without copying them. I tell Docker: "make `/home/shen/Dev/MP_FogJob` on my computer appear as `/workspace/MP_FogJob` inside the container". Now Jenkins can read my code and create builds, while temporary files stay contained in the container's own filesystem.
+
+**UID Mapping:** I configured Jenkins to run as UID 1000, which is the same user ID as my host account. When Jenkins creates files in the mounted volumes, they are automatically owned by me on the host. No permission conflicts.
+
+**Plugin dependencies**: 
+
+**docker-compose.yml highlights:**
+```yaml
+services:
+  jenkins:
+    user: "1000:1000"  # Why this matters
+    volumes:
+      - jenkins_home:/var/jenkins_home  # Persistent data
+      - /path/to/project:/workspace/project  # Read/write access
+      - /path/to/engine:/workspace/engine  # Engine files
+    environment:
+      - GIT_LFS_SKIP_SMUDGE=1  # Why we skip LFS
+```
 ## Jenkins
 
 ## Cloudflare
