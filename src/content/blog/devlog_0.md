@@ -25,6 +25,7 @@ I finally ended up with a solution where I uses docker compose to handle Jenkins
 **Version Tracking:** Each build is automatically tagged with a timestamp and git commit hash, creating unique identifiers like *Development_20260226_120238_a3f2c1b*. This makes it easier to trace any build back to the exact code that produced it.
 
 **Logging:** All output is piped to `build_log.txt` using tee, so I can see the build progress in real-time while keeping record. When builds fail (which they almost never do of course shut up mind you), these logs simplifies debugging.
+
 ### The Core Logic
 
 The script generates a unique version for each build:
@@ -44,7 +45,6 @@ Then calls Unreals automation tool with the right flags:
     -cook -build -stage -pak -archive
 ```
 This single command compiles the code, cooks the assets, stages the files, and packages everything into a distributable build. The script also creates a latest symlink that always points to the most recent build, making it easier to locate the current version.
-
 
 **[View build.sh on GitHub](https://github.com/hcdvall/mp-fog-job/blob/main/build.sh)**
 
@@ -80,6 +80,9 @@ services:
     environment:
       - GIT_LFS_SKIP_SMUDGE=1  # Why we skip LFS
 ```
+
+**Skipping Git LFS:** Since the Docker container mounts my project directory directly, Jenkins already has access to all the large assets managed by Git LFS. There is no need to download them again from GitHub. By setting GIT_LFS_SKIP_SMUDGE=1, we tell Git to skip the LFS download step entirely and speed up the checkout process.
+
 ## Jenkins
 
 ## Cloudflare
