@@ -1,11 +1,9 @@
 ---
-title: "Devlog #0"
-description: "Initial development log entry"
+title: "Unreal Jenkins Pipeline"
+description: "A simple, yet efficient automation of build distribution."
 pubDate: 2026-01-28
 author: "Hank"
 ---
-
-# Devlog #0
 
 ## Background
 
@@ -17,7 +15,7 @@ When I got a base for the game up and running and I wanted to try out the online
 
 Then I found it even more tedious to upload the build somewhere and then let friends know about the new build and have them download and run the build (this was also a topic of its own, leading to me writing a bash-script to launch the game). There were many parameters that had me think that automation would be nice and I figured Jenkins could be helpful, along with some setup to let friends get the builds directly from my system, instead of having me upload all the time. AND it would be nice to have some kind of notification to send out when builds failed or succeeded.
 
-I finally ended up with a solution where I Docker Compose runs Jenkins, which listens to pushes or manual triggered builds and runs a bash-script. Jenkins forwards build results to a Discord server and the Jenkins dashboard lives on my personal website for anyone to witness (as long as my PC is running the Docker instance). I also setup login credentials for myself, so only I can mess around with the build system, but testers can download builds.
+I finally ended up with a solution where Docker Compose runs Jenkins, which listens to pushes or manual triggered builds and runs a bash-script. Jenkins forwards build results to a Discord server and the Jenkins dashboard lives on my personal website for anyone to witness (as long as my PC is running the Docker instance). I also setup login credentials for myself, so only I can mess around with the build system, but testers can download builds.
 
 ## The build-script 
 

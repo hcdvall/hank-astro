@@ -89,13 +89,13 @@ const { title, startDate, description, author, heroImg, highlight} = Astro.props
       top: 2rem;
       left: 50%;
       transform: translate(-50%, 25%);
-      color: var(--dracula-orange);
+      color: var(--heading-accent);
       padding: 0.5em 1em;
       border-radius: 0.5em;
       font-size: 5rem;
       font-weight: bold;
       font-family: "VT323", monospace;
-      text-shadow: 0 2px 8px #000;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
       pointer-events: none;
       white-space: nowrap;
     }
@@ -157,15 +157,15 @@ const { title, startDate, description, author, heroImg, highlight} = Astro.props
     }
 
     :global(.project-content blockquote) {
-      border-left: 4px solid #e5e7eb;
+      border-left: 4px solid var(--markdown-header-color);
       padding-left: 1rem;
       margin: 1.5rem 0;
       font-style: italic;
-      color: #6b7280;
+      opacity: 0.7;
     }
 
     :global(.project-content code) {
-      background-color: var(--dracula-orange);
+      background-color: var(--inline-code-bg);
       padding: 0.2rem 0.4rem;
       border-radius: 3px;
       font-family: 'Hermit', monospace;
@@ -174,8 +174,8 @@ const { title, startDate, description, author, heroImg, highlight} = Astro.props
     }
 
     :global(.project-content pre) {
-      background-color: #1f2937;
-      color: #f9fafb;
+      background-color: var(--code-bg);
+      color: var(--code-color);
       padding: 1rem;
       border-radius: 6px;
       overflow-x: auto;

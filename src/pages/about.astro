@@ -32,11 +32,26 @@ import MainLayout from '../layouts/MainLayout.astro';
       </p>
       
       <div class="job-grid">
-        <div class="job-item">Ericsson - telecommunication systems</div>
-        <div class="job-item">Volvo Cars - computer vision in manufacturing</div>
-        <div class="job-item">Ziklo Bank - customer analytics in fintech</div>
-        <div class="job-item">FirstVet - natural language processing for veterinarians</div>
-        <div class="job-item">Maximum Entertainment - AI-driven wildlife NPCs in games</div>
+        <div class="job-item">
+          <span class="job-company">Ericsson</span>
+          <span class="job-domain">telecommunication systems</span>
+        </div>
+        <div class="job-item">
+          <span class="job-company">Volvo Cars</span>
+          <span class="job-domain">computer vision in manufacturing</span>
+        </div>
+        <div class="job-item">
+          <span class="job-company">Ziklo Bank</span>
+          <span class="job-domain">customer analytics in fintech</span>
+        </div>
+        <div class="job-item">
+          <span class="job-company">FirstVet</span>
+          <span class="job-domain">natural language processing for veterinarians</span>
+        </div>
+        <div class="job-item">
+          <span class="job-company">Maximum Entertainment</span>
+          <span class="job-domain">AI-driven wildlife NPCs in games</span>
+        </div>
       </div>
 
       <p>
@@ -95,16 +110,19 @@ import MainLayout from '../layouts/MainLayout.astro';
 
     /* Content Sections */
     .content-section {
-      margin-top: 1.0rem;
-      margin-bottom: 2.5rem;
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+      padding: 0.5rem 1.5rem 1.5rem;
+      background: var(--section-background);
+      border-radius: 0.3rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
     }
 
     .content-section h2 {
-      font-size: 1.5rem;
-      color: var(--navbar-glow-color, #50fa7b);
-      margin-bottom: -0.7rem;    /* Less space */
+      color: var(--text-color);
+      margin-bottom: 0.5rem;
       font-family: var(--header-font);
-      font-size: var(--header-font-size)
+      font-size: var(--header-font-size);
     }
 
     .content-section p {
@@ -114,7 +132,7 @@ import MainLayout from '../layouts/MainLayout.astro';
 
     .about-flex {
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       gap: 2rem;
       margin-top: 1rem;
     }
@@ -144,24 +162,47 @@ import MainLayout from '../layouts/MainLayout.astro';
     }
 
     .job-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 0.5rem;
-      margin-left: 1.2rem; /* Slight indent */
-      padding: 0.2rem 0.5rem;
-      background: none;
-      border: none;
-      box-shadow: none;
+      display: flex;
+      flex-direction: column;
+      margin: 1rem 0;
     }
 
     .job-item {
-      padding: 0.2rem 0.5rem;
-      border-radius: 0;
-      font-size: 1.2rem;
+      display: grid;
+      grid-template-columns: 13rem 1fr;
+      align-items: baseline;
+      gap: 0.5rem;
+      padding: 0.45rem 1rem;
+      opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+
+    .job-item:hover {
+      opacity: 1;
+    }
+
+    .job-company {
+      position: relative;
+      padding-left: 1.3rem;
+      font-family: 'VT323', monospace;
+      font-size: 1.25rem;
       color: var(--the-accent);
-      margin-bottom: 0.1rem;
-      box-shadow: none;
-      transition: none;
+    }
+
+    .job-company::before {
+      content: '▶';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.65rem;
+      color: var(--the-accent);
+    }
+
+    .job-domain {
+      font-size: 0.9rem;
+      color: var(--experience-date);
+      line-height: 1.4;
     }
 
 

@@ -15,7 +15,7 @@ const highlightedProjects = allProjects
 <MainLayout>
   <!-- About -->
    <section class="section about-section">
-    <h2>Hello there!</h2>
+    <h2>hello</h2>
     <div class="about-flex">
       <img src="/images/Henrik_2023.JPG" alt="Henrik Sedvall" class="about-img" />
       <div class="about-text">
@@ -142,16 +142,16 @@ const highlightedProjects = allProjects
 
     .section h2 {
       font-size: 30px;
-      color: var(--navbar-glow-color);
+      color: var(--text-color);
       text-align: center;
-      margin-bottom: 0.5rem;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
       font-family: var(--header-font);
-      text-shadow: 
-        0px 0px 3px var(--navbar-glow-color), 
-        0px 0px 3px var(--navbar-glow-color); 
-      font-weight: normal; 
+      text-shadow: none;
+      font-weight: normal;
       letter-spacing: normal;
-      border-bottom: dotted 4px;
+      border-bottom: 2px dotted var(--content-border-color);
     }
 
     .about-flex {
@@ -173,7 +173,7 @@ const highlightedProjects = allProjects
 
     .about-text {
       flex: 1;
-      font-size: 1.5rem;
+      font-size: 1.1rem;
     }
 
     .project-grid {
@@ -247,9 +247,7 @@ const highlightedProjects = allProjects
     }
 
     .skills-section {
-      padding: 0rem 1rem 1rem;
-      max-width: 1200px;
-      margin: 1rem auto;
+      margin-top: 1rem;
     }
 
     .skills-grid {
@@ -305,6 +303,8 @@ const highlightedProjects = allProjects
       position: relative;
       max-width: 800px;
       margin: 2rem auto 0;
+      border-left: 2px solid var(--content-border-color);
+      padding-left: 0;
     }
 
     .experience-item {
@@ -312,6 +312,15 @@ const highlightedProjects = allProjects
       margin-bottom: 2rem;
       padding: 0rem 1.5rem 0rem 2.5rem;
       transition: transform 0.3s ease;
+    }
+
+    .experience-item::before {
+      content: '▶';
+      position: absolute;
+      left: 0.6rem;
+      top: 0.1rem;
+      font-size: 0.65rem;
+      color: var(--the-accent);
     }
 
     .experience-item:hover {

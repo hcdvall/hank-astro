@@ -69,7 +69,6 @@ const latestPost = allPosts
           <h3 class="post-title">{latestPost.data.title}</h3>
           <p class="post-desc">{latestPost.data.description}</p>
         </div>
-        <span class="post-arrow">&rarr;</span>
       </a>
       <a href="/blog" class="view-all">all posts &rarr;</a>
     </section>
@@ -131,6 +130,17 @@ const latestPost = allPosts
       display: flex;
       align-items: center;
       gap: 2rem;
+    }
+
+    .about-img {
+      width: 270px;
+      height: 270px;
+      object-fit: cover;
+      border-radius: 20%;
+      border: 2px solid var(--content-border-color);
+      flex-shrink: 0;
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
     }
 
     .about-text {
@@ -337,6 +347,12 @@ const latestPost = allPosts
         margin-bottom: 0.5rem;
       }
 
+      .about-img {
+        width: 80%;
+        height: auto;
+        margin: 0;
+      }
+
       .experience-timeline {
         margin-top: 1.5rem;
       }
@@ -358,3 +374,4 @@ const latestPost = allPosts
   </style>
 
 </MainLayout>
+

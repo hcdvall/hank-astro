@@ -3,13 +3,13 @@ const links = [
   { href: "/about", label: "About" },
   { href: "/blog", label: "Blog" },
   { href: "/projects", label: "Projects" },
-  { href: "/home", label: "Portfolio" },
+  { href: "/portfolio", label: "Portfolio" },
 ];
 ---
 <nav class="navbar">
   <!-- Brand/Logo with glitch effect - positioned on the left -->
   <div class="navbar-brand">
-    <a href="/">
+    <a href="/portfolio">
       <h1 class="glitch-navbar" data-text="HENRIK_SEDVALL">HENRIK_SEDVALL</h1>
     </a>
   </div>
@@ -160,13 +160,13 @@ const links = [
 
   .glitch-navbar::before {
     animation: glitch-navbar-1 0.3s infinite;
-    color: var(--dracula-pink);
+    color: var(--the-accent);
     z-index: -1;
   }
 
   .glitch-navbar::after {
     animation: glitch-navbar-2 0.3s infinite;
-    color: var(--dracula-purple);
+    color: var(--dracula-cyan);
     z-index: -2;
   }
 
