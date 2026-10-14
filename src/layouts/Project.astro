@@ -1,4 +1,6 @@
 ---
+import type { ImageMetadata } from 'astro';
+import type { CollectionEntry } from 'astro:content';
 import MainLayout from './MainLayout.astro';
 import CoverMedia from '../components/CoverMedia.astro';
 import { formatDate } from '../utils';
@@ -7,16 +9,20 @@ interface Props {
   title: string;
   description: string;
   startDate: Date;
-  heroImg?: string;
+  cover?: ImageMetadata | string;
+  coverVideo?: string;
+  links?: CollectionEntry<'projects'>['data']['links'];
 }
 
-const { title, startDate, description, heroImg } = Astro.props;
+const { title, startDate, description, cover, coverVideo, links } = Astro.props;
+const linkLabels = { repo: 'Source code', itch: 'itch.io', video: 'Video' } as const;
+const projectLinks = Object.entries(links ?? {}).filter(([, href]) => href) as [keyof typeof linkLabels, string][];
 ---
 <MainLayout title={title} description={description}>
   <article class="project">
     <header class="project-header">
       <div class="hero-img-container">
-        <CoverMedia image={heroImg} alt="" loading="eager" />
+        <CoverMedia image={cover} video={coverVideo} alt="" loading="eager" />
       </div>
       <h1 class="hero-title">{title}</h1>
     </header>
@@ -26,6 +32,13 @@ const { title, startDate, description, heroImg } = Astro.props;
     </section>
 
     <footer class="project-footer">
+      {projectLinks.length > 0 && (
+        <ul class="project-links">
+          {projectLinks.map(([key, href]) => (
+            <li><a href={href} target="_blank" rel="noopener noreferrer">{linkLabels[key]}</a></li>
+          ))}
+        </ul>
+      )}
       <p class="project-date">
         Started on <time datetime={startDate.toISOString()}>{formatDate(startDate)}</time>
       </p>
@@ -47,6 +60,18 @@ const { title, startDate, description, heroImg } = Astro.props;
     .project-date {
       font-size: 0.9em;
       margin: 5px 0;
+    }
+
+    .project-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      list-style: none;
+      padding: 0;
+    }
+
+    .project-links a {
+      color: var(--the-accent);
     }
 
     .project-content {

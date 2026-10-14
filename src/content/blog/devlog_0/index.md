@@ -135,15 +135,15 @@ Under Manage Jenkins you can "Add credentials". In this case I used ""Username w
 4. Enter your GitHub username and paste the token as the password
 5. Set the ID to github-credentials (this matches what the Jenkinsfile expects)
 
-![Credentials](/images/blogs/credentials.png)
-![Add credentials](/images/blogs/add_credentials.png)
+![Credentials](./credentials.png)
+![Add credentials](./add_credentials.png)
 
 When this is setup, Jenkins will be able to authenticate and pull from the repo. 
 
 ### Discord Notifications
 The discord setup is quite straightforward as the Github. You add credentials the same way, but use "Secret text" instead of "Username with Password". In Discord you will have to create a webhook and grab the webhook URL from a server you want to use. 
 
-![Discord webhook](/images/blogs/discord_webhook.png)
+![Discord webhook](./discord_webhook.png)
 
 In Jenkins one also has to make sure to install plugins for Discord and GithHub integration. Now with all that setup Jenkins can send build notifications directly to your Discord channel with download links and build status.
 

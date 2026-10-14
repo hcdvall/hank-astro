@@ -4,7 +4,7 @@ import EntryList from '../../components/EntryList.astro';
 import { getProjects } from '../../utils';
 
 const items = (await getProjects()).map(entry => ({
-  href: `/projects/${entry.slug}/`,
+  href: `/projects/${entry.id}/`,
   title: entry.data.title,
   date: entry.data.startDate,
 }));

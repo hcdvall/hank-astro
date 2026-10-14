@@ -7,11 +7,11 @@ interface Props {
 }
 
 const { project } = Astro.props;
-const { title, description, heroImg } = project.data;
+const { title, description, cover, coverVideo, heroImg } = project.data;
 ---
-<a href={`/projects/${project.slug}/`} class="project-card">
+<a href={`/projects/${project.id}/`} class="project-card">
   <div class="project-img-wrapper">
-    <CoverMedia image={heroImg} alt={title} />
+    <CoverMedia image={cover ?? heroImg} video={coverVideo} alt={title} />
     <div class="project-title-overlay">{title}</div>
   </div>
   <div class="project-info">

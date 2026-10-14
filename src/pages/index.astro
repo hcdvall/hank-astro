@@ -37,7 +37,7 @@ const [latestPost] = await getPosts();
   {latestPost && (
     <section class="section">
       <h2>latest post</h2>
-      <a href={`/blog/${latestPost.slug}/`} class="post-card">
+      <a href={`/blog/${latestPost.id}/`} class="post-card">
         <div class="post-card-inner">
           <span class="post-date">
             {formatDate(latestPost.data.pubDate)}

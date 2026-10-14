@@ -4,7 +4,7 @@ import EntryList from '../../components/EntryList.astro';
 import { getPosts } from '../../utils';
 
 const items = (await getPosts()).map(entry => ({
-  href: `/blog/${entry.slug}/`,
+  href: `/blog/${entry.id}/`,
   title: entry.data.title,
   date: entry.data.pubDate,
 }));

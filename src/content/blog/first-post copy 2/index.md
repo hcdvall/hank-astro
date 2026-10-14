@@ -9,7 +9,7 @@ author: "Henrik Sedvall"
 
 Picture vectors as arrows flying through your game world - they have direction and magnitude, like a player's velocity or the direction an enemy is facing. Now, what happens when these vectors collide mathematically? That's where our two mathematical superstars enter the stage!
 
-![Vector illustration](/public/images/vector_concepts_diagram.svg)
+![Vector illustration](./vector_concepts_diagram.svg)
 
 ## Dot Product: The "Friendship Meter" 
 

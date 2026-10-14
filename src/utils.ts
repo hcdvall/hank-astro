@@ -9,15 +9,18 @@ export function formatDate(date: Date, month: 'long' | 'short' = 'long') {
   });
 }
 
+// Drafts are visible in `astro dev` but left out of production builds.
+const isPublished = ({ data }: { data: { draft: boolean } }) => !import.meta.env.PROD || !data.draft;
+
 /** Blog posts, newest first. */
 export async function getPosts() {
-  const posts = await getCollection('blog');
+  const posts = await getCollection('blog', isPublished);
   return posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 }
 
 /** Projects, newest first. */
 export async function getProjects() {
-  const projects = await getCollection('projects');
+  const projects = await getCollection('projects', isPublished);
   return projects.sort((a, b) => b.data.startDate.valueOf() - a.data.startDate.valueOf());
 }
 

@@ -1,5 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import MainLayout from '../layouts/MainLayout.astro';
+import profile from '../assets/profile.jpg';
 ---
 <MainLayout title="About">
   <h1 class="sr-only">About</h1>
@@ -8,7 +10,7 @@ import MainLayout from '../layouts/MainLayout.astro';
     <section class="content-section about-with-image">
       
       <div class="about-flex">
-        <img src="/images/Henrik_2023.JPG" alt="Henrik Sedvall" class="profile-image" />
+        <Image src={profile} alt="Henrik Sedvall" class="profile-image" width={540} height={540} loading="lazy" />
         <div class="about-text">
           <p>
             Hello, I am Henrik! I'm a reasonably funny, cool-headed dad and husband enjoying life in Dalarna - the heart and soul of Sweden. 
