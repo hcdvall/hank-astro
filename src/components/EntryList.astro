@@ -1,0 +1,79 @@
+---
+import { formatDate } from '../utils';
+
+interface Props {
+  items: { href: string; title: string; date: Date }[];
+}
+
+const { items } = Astro.props;
+---
+<ul class="entry-list">
+  {items.map((item) => (
+    <li class="entry">
+      <a href={item.href} class="entry-title">{'> ' + item.title}</a>
+      <span class="dot-leader"></span>
+      <time class="entry-date" datetime={item.date.toISOString()}>{formatDate(item.date, 'short')}</time>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .entry-list {
+    max-width: 1200px;
+    list-style-type: none;
+    padding: 0;
+    margin-top: -10px;
+    font-family: var(--font-display);
+    font-size: 1.8em;
+  }
+
+  .entry {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .entry-title {
+    flex: 0 1 auto;
+    min-width: 200px;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .dot-leader {
+    flex: 1 1 auto;
+    height: 0.8em;
+    margin: 0 0.5em;
+    background-image: repeating-linear-gradient(
+      to right,
+      #888 0 2px,
+      transparent 2px 11px
+    );
+    background-position: bottom;
+    background-size: 12px 3px;
+    background-repeat: repeat-x;
+  }
+
+  .entry-date {
+    font-size: 0.9em;
+    color: gray;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 600px) {
+    .entry {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-top: 0.3em;
+      padding: 0rem 1.5rem;
+    }
+    .dot-leader {
+      display: none;
+    }
+    .entry-date {
+      margin-left: 0;
+      margin-top: -0.5em;
+    }
+  }
+</style>

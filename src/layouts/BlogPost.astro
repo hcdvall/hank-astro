@@ -1,5 +1,6 @@
 ---
 import MainLayout from './MainLayout.astro';
+import { formatDate } from '../utils';
 
 const { title, pubDate, description } = Astro.props;
 ---
@@ -10,17 +11,13 @@ const { title, pubDate, description } = Astro.props;
       <p class="blog-post-description">{description}</p>
     </header>
 
-    <section class="blog-post-content">
+    <section class="blog-post-content prose">
         <slot />
     </section>
 
     <footer class="blog-post-footer">
         <p class="blog-post-date">
-          Published on {pubDate.toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-          })}
+          Published on {formatDate(pubDate)}
         </p>
       </footer>
   </article>
@@ -39,7 +36,7 @@ const { title, pubDate, description } = Astro.props;
 
     .blog-post-title {
       font-size: 3.0em;
-      font-family: "VT323", monospace;
+      font-family: var(--font-display);
       color: var(--heading-accent);
       margin: 0;
       text-shadow: 0px 0px 2px var(--heading-accent), 0px 0px 2px var(--heading-accent);
@@ -55,114 +52,9 @@ const { title, pubDate, description } = Astro.props;
       margin: 10px 0;
     }
 
-    .blog-post-content {
-      line-height: 1.6;
-      font-size: 1em;
-    }
-
-    /* Markdown Content Styling */
-    :global(.blog-post-content h1),
-    :global(.blog-post-content h2),
-    :global(.blog-post-content h3),
-    :global(.blog-post-content h4) {
-      font-family: 'VT323', monospace;
-      font-weight: lighter;
-      text-shadow: none;
-    }
-
-    :global(.blog-post-content h1) {
-      font-size: calc(var(--heading-base, 1.1rem) * 2.5);
-      margin: 2rem 0 1rem 0;
-      line-height: 1.2;
-      padding-bottom: 0.5rem;
-      font-weight: normal;
-      color: var(--markdown-header-color);
-    }
-
-    :global(.blog-post-content h2) {
-      font-size: calc(var(--heading-base, 1.1rem) * 2);
-      color: var(--markdown-header-color);
-      margin: 1.8rem 0 1rem 0;
-      line-height: 1.3;
+    .blog-post-content :global(h2) {
       border-bottom: 1px solid var(--markdown-header-color);
       padding-bottom: 0.3rem;
-    }
-
-    :global(.blog-post-content h3) {
-      font-size: calc(var(--heading-base, 1.1rem) * 1.5);
-      color: var(--markdown-header-color);
-      margin: 1.5rem 0 0.8rem 0;
-      line-height: 1.4;
-    }
-
-    :global(.blog-post-content h4) {
-      font-size: calc(var(--heading-base, 1.1rem) * 1.2);
-      color: var(--markdown-header-color);
-      margin: 1.2rem 0 0.6rem 0;
-    }
-
-    :global(.blog-post-content p) {
-      margin-bottom: 1.2rem;
-      line-height: 1.7;
-    }
-
-    :global(.blog-post-content ul, .blog-post-content ol) {
-      margin: 1rem 0;
-      padding-left: 2rem;
-    }
-
-    :global(.blog-post-content li) {
-      margin-bottom: 0.5rem;
-      line-height: 1.6;
-    }
-
-    :global(.blog-post-content blockquote) {
-      border-left: 4px solid var(--markdown-header-color);
-      padding-left: 1rem;
-      margin: 1.5rem 0;
-      font-style: italic;
-      opacity: 0.7;
-    }
-
-    :global(.blog-post-content code) {
-      background-color: var(--inline-code-bg);
-      padding: 0.2rem 0.4rem;
-      border-radius: 3px;
-      font-family: monospace;
-      font-weight: bold;
-      font-size: 0.9em;
-    }
-
-    :global(.blog-post-content pre) {
-      background-color: var(--code-bg);
-      color: var(--code-color);
-      padding: 1rem;
-      border-radius: 6px;
-      overflow-x: auto;
-      margin: 1.5rem 0;
-    }
-
-    :global(.blog-post-content pre code) {
-      background-color: transparent;
-      padding: 0;
-      color: inherit;
-    }
-
-    :global(.blog-post-content a) {
-      color: var(--markdown-header-color);
-      text-decoration: underline;
-    }
-
-    :global(.blog-post-content a:hover) {
-      color: var(--markdown-header-color);
-    }
-
-    :global(.blog-post-content strong) {
-      font-weight: 700;
-    }
-
-    :global(.blog-post-content em) {
-      font-style: italic;
     }
 
     @media (max-width: 900px) {

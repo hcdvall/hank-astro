@@ -1,94 +1,19 @@
 ---
-import { getCollection } from 'astro:content';
 import MainLayout from '../../layouts/MainLayout.astro';
+import EntryList from '../../components/EntryList.astro';
+import { getProjects } from '../../utils';
 
-// Fetch and sort projects by startDate (newest first)
-const projects = (await getCollection('projects')).sort(
-  (a, b) => b.data.startDate.valueOf() - a.data.startDate.valueOf()
-);
+const items = (await getProjects()).map(entry => ({
+  href: `/projects/${entry.slug}/`,
+  title: entry.data.title,
+  date: entry.data.startDate,
+}));
 ---
 <head>
   <title>Projects | Henrik Sedvall</title>
 </head> 
 
+
 <MainLayout>
-  <ul class="project-list">
-    {projects.map(project => (
-      <li class="project-item">
-        <a href={`/projects/${project.slug}/`} class="project-title">{"> " + project.data.title}</a>
-        <span class="dot-leader"></span>
-        <span class="project-date">
-          {project.data.startDate.toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric',
-          })}
-        </span>
-      </li>
-    ))}
-  </ul>
+  <EntryList items={items} />
 </MainLayout>
-
-<style>
-  .project-list {
-    max-width: 1200px;
-    list-style-type: none;
-    padding: 0;
-    margin-top: -10px;
-    font-family: 'VT323', monospace;
-    font-size: 1.8em;
-  }
-
-  .project-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-
-  .project-title {
-    flex: 0 1 auto;
-    text-decoration: none;
-    color: inherit;
-  }
-
-  .dot-leader {
-    flex: 1 1 auto;
-    height: 0.8em;
-    margin: 0 0.5em;
-    position: relative;
-    opacity: 1.0;
-    border-bottom: none;
-    background-image: repeating-linear-gradient(
-      to right,
-      #888 0 2px,
-      transparent 2px 11px
-    );
-    background-position: bottom;
-    background-size: 12px 3px;
-    background-repeat: repeat-x;
-    transition: opacity 0.2s;
-  }
-
-  .project-date {
-    font-size: 0.9em;
-    color: gray;
-    flex-shrink: 0;
-  }
-
-  @media (max-width: 600px) {
-    .project-item {
-      flex-direction: column;
-      align-items: flex-start;
-      margin-top: -0.3em;
-      padding: 0rem 1.5rem;
-    }
-    .dot-leader {
-      display: none;
-    }
-    .project-date {
-      margin-left: 0;
-      margin-top: -0.5em;
-    }
-  }
-</style>

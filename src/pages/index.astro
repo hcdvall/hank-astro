@@ -1,17 +1,10 @@
-
 ---
 import MainLayout from '../layouts/MainLayout.astro';
-import { getCollection } from 'astro:content';
+import ProjectCard from '../components/ProjectCard.astro';
+import { formatDate, getHighlightedProjects, getPosts } from '../utils';
 
-const allProjects = await getCollection('projects');
-const recentProjects = allProjects
-  .filter(p => p.data.highlight)
-  .sort((a, b) => b.data.startDate.valueOf() - a.data.startDate.valueOf())
-  .slice(0, 3);
-
-const allPosts = await getCollection('blog');
-const latestPost = allPosts
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())[0];
+const recentProjects = await getHighlightedProjects(3);
+const [latestPost] = await getPosts();
 ---
 
 <head>
@@ -38,19 +31,7 @@ const latestPost = allPosts
     <h2>recent work</h2>
     <div class="project-grid">
       {recentProjects.length === 0 && <p>No projects yet.</p>}
-      {recentProjects.map(project => (
-        <a href={`/projects/${project.slug}/`} class="project-card">
-          <div class="project-img-wrapper">
-            {project.data.heroImg && (
-              <img src={project.data.heroImg} alt={project.data.title} class="project-img" />
-            )}
-            <div class="project-title-overlay">{project.data.title}</div>
-          </div>
-          <div class="project-info">
-            <p>{project.data.description}</p>
-          </div>
-        </a>
-      ))}
+      {recentProjects.map(project => <ProjectCard project={project} />)}
     </div>
     <a href="/projects" class="view-all">all projects &rarr;</a>
   </section>
@@ -62,9 +43,7 @@ const latestPost = allPosts
       <a href={`/blog/${latestPost.slug}/`} class="post-card">
         <div class="post-card-inner">
           <span class="post-date">
-            {latestPost.data.pubDate.toLocaleDateString('en-US', {
-              year: 'numeric', month: 'long', day: 'numeric'
-            })}
+            {formatDate(latestPost.data.pubDate)}
           </span>
           <h3 class="post-title">{latestPost.data.title}</h3>
           <p class="post-desc">{latestPost.data.description}</p>
@@ -146,68 +125,6 @@ const latestPost = allPosts
       padding: 1rem 0 0 0;
     }
 
-    .project-card {
-      background: var(--background-color);
-      border-radius: 0.2rem;
-      overflow: hidden;
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .project-card:hover {
-      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-      background: var(--card-project-hover);
-    }
-
-    .project-img-wrapper {
-      position: relative;
-      width: 100%;
-      height: 200px;
-      overflow: hidden;
-    }
-
-    .project-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: blur(6px);
-      transition: filter 0.0s;
-    }
-
-    .project-card:hover .project-img {
-      filter: blur(0);
-    }
-
-    .project-title-overlay {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: var(--card-project-title);
-      font-family: 'VT323';
-      font-size: 2.8rem;
-      z-index: 2;
-      pointer-events: none;
-      text-align: center;
-      width: 90%;
-      white-space: pre-line;
-      transition: opacity 0.3s;
-      opacity: 1;
-    }
-
-    .project-card:hover .project-title-overlay {
-      opacity: 0;
-    }
-
-    .project-info {
-      padding: 1.5rem;
-      border: 1.5px solid var(--card-project-border);
-    }
-
-    .project-info p {
-      line-height: 1.6;
-    }
-
     /* -- LATEST POST -- */
     .post-card {
       display: flex;
@@ -235,13 +152,13 @@ const latestPost = allPosts
     .post-date {
       font-size: 0.8rem;
       color: var(--experience-date);
-      font-family: 'VT323', monospace;
+      font-family: var(--font-display);
       display: block;
       margin-bottom: 0.4rem;
     }
 
     .post-title {
-      font-family: 'VT323', monospace;
+      font-family: var(--font-display);
       font-size: 1.8rem;
       font-weight: normal;
       color: var(--text-color);
@@ -307,7 +224,7 @@ const latestPost = allPosts
       color: var(--experience-date);
       font-size: 1.2rem;
       margin-bottom: 0.3rem;
-      font-family: 'VT323', monospace;
+      font-family: var(--font-display);
     }
 
     .experience-title {

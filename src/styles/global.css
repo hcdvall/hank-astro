@@ -1,0 +1,222 @@
+/* Fonts */
+@font-face {
+  font-family: 'Fira Code';
+  src: url('/fonts/FiraCode-VariableFont_wght.ttf') format('truetype');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'VT323';
+  src: url('/fonts/VT323-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PressStart2P';
+  src: url('/fonts/PressStart2P-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Design tokens */
+:root {
+  --dracula-cyan: #8be9fd;
+  --dracula-green: #50fa7b;
+  --dracula-orange: #ffb86c;
+  --dracula-purple: #bd93f9;
+
+  --the-white: #F2F2F2;
+  --the-grey: #EAE4D5;
+  --the-beige: #B6B09F;
+  --the-black: #131313;
+  --the-accent: #ff79c6;
+  --the-yellow: #fcffc0;
+
+  --font-body: 'Fira Code', sans-serif;
+  --font-display: 'VT323', monospace;
+  --header-font: 'PressStart2P', monospace;
+  --header-font-size: 1.3rem;
+}
+
+/* Dark theme (default) */
+body {
+  --background-color: var(--the-black);
+  --navbar-background: var(--the-black);
+  --footer-background: var(--the-black);
+  --text-color: var(--the-white);
+  --navbar-text-color: var(--the-white);
+  --navbar-glow-color: none;
+  --button-hover: var(--the-accent);
+  --markdown-header-color: var(--the-white);
+  --content-border-color: var(--the-white);
+  --card-project-hover: var(--the-accent);
+  --card-project-title: var(--the-accent);
+  --card-project-border: var(--the-white);
+  --experience-date: var(--the-grey);
+  --experience-title: var(--the-white);
+  --experience-company: var(--the-accent);
+  --section-background: #1a1a1a;
+  --heading-accent: var(--dracula-green);
+  --code-bg: #1f2937;
+  --code-color: #f9fafb;
+  --inline-code-bg: var(--dracula-orange);
+}
+
+/* Light theme */
+body[data-theme="light"] {
+  --background-color: var(--the-white);
+  --navbar-background: var(--the-white);
+  --footer-background: var(--the-white);
+  --text-color: var(--the-black);
+  --navbar-text-color: var(--the-black);
+  --navbar-glow-color: var(--the-black);
+  --button-hover: var(--the-accent);
+  --markdown-header-color: var(--the-black);
+  --content-border-color: var(--the-black);
+  --card-project-hover: var(--the-accent);
+  --card-project-title: var(--the-accent);
+  --card-project-border: var(--the-black);
+  --experience-date: var(--the-beige);
+  --experience-title: var(--the-black);
+  --experience-company: var(--the-accent);
+  --section-background: #ebebeb;
+  --heading-accent: var(--dracula-purple);
+  --code-bg: #e8e8e8;
+  --code-color: #1e1e1e;
+  --inline-code-bg: #ede8f8;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  line-height: 1.6;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+@media (max-width: 700px) {
+  body {
+    font-size: 0.85rem;
+  }
+}
+
+/* Markdown content (blog posts and projects) */
+.prose {
+  line-height: 1.6;
+  font-size: 1em;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4 {
+  font-family: var(--font-display);
+  font-weight: lighter;
+  color: var(--markdown-header-color);
+  text-shadow: none;
+}
+
+.prose h1 {
+  font-size: calc(var(--heading-base, 1.1rem) * 2.5);
+  margin: 2rem 0 1rem 0;
+  line-height: 1.2;
+  padding-bottom: 0.5rem;
+  font-weight: normal;
+}
+
+.prose h2 {
+  font-size: calc(var(--heading-base, 1.1rem) * 2);
+  margin: 1.8rem 0 1rem 0;
+  line-height: 1.3;
+}
+
+.prose h3 {
+  font-size: calc(var(--heading-base, 1.1rem) * 1.5);
+  margin: 1.5rem 0 0.8rem 0;
+  line-height: 1.4;
+}
+
+.prose h4 {
+  font-size: calc(var(--heading-base, 1.1rem) * 1.2);
+  margin: 1.2rem 0 0.6rem 0;
+}
+
+.prose p {
+  margin-bottom: 1.2rem;
+  line-height: 1.7;
+}
+
+.prose ul,
+.prose ol {
+  margin: 1rem 0;
+  padding-left: 2rem;
+}
+
+.prose li {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+.prose blockquote {
+  border-left: 4px solid var(--markdown-header-color);
+  padding-left: 1rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  opacity: 0.7;
+}
+
+.prose code {
+  background-color: var(--inline-code-bg);
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-family: monospace;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+
+.prose pre {
+  background-color: var(--code-bg);
+  color: var(--code-color);
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+.prose pre code {
+  background-color: transparent;
+  padding: 0;
+  color: inherit;
+}
+
+.prose a,
+.prose a:hover {
+  color: var(--markdown-header-color);
+  text-decoration: underline;
+}
+
+.prose strong {
+  font-weight: 700;
+}
+
+.prose em {
+  font-style: italic;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .fade-in {
+    opacity: 1 !important;
+  }
+}

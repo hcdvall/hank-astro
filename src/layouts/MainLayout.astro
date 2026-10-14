@@ -2,14 +2,16 @@
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import { ClientRouter } from "astro:transitions";
-const { showNavbar = true, showFooter = true } = Astro.props;
+import { SITE_NAME } from "../consts";
+import "../styles/global.css";
 
+const { showNavbar = true, showFooter = true } = Astro.props;
 ---
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Henrik Sedvall</title>
+    <title>{SITE_NAME}</title>
     <script src="/theme.js" is:inline></script>
     <ClientRouter />
   </head>
@@ -25,119 +27,17 @@ const { showNavbar = true, showFooter = true } = Astro.props;
 </html>
 
 <style>
-  @font-face {
-    font-family: 'Fira Code';
-    src: url('/fonts/FiraCode-VariableFont_wght.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  :root {
-    --dracula-background-darker: #131313;
-    --dracula-background-lighter: #282a36;
-    --dracula-area: #44475a;
-    --dracula-foreground: #f8f8f2;
-    --dracula-comment: #6272a4;
-    --dracula-cyan: #8be9fd;
-    --dracula-green: #50fa7b;
-    --dracula-orange: #ffb86c;
-    --dracula-pink: #ff79c6;
-    --dracula-purple: #bd93f9;
-    --dracula-red: #ff5555;
-    --dracula-yellow: #f1fa8c;
-    --dracula-yellow-lighter: #fcffc0;
-    --dracula-blue: #6272a4;
-
-    --the-white:#F2F2F2;
-    --the-grey:#EAE4D5;
-    --the-beige:#B6B09F;
-    --the-black:#131313;
-    --the-blacker-black: #0D0D0D;
-    --the-accent:#ff79c6;
-    --the-yellow:#fcffc0;
-
-    --header-font: 'PressStart2P', monospace;
-    --header-font-size: 1.3rem;
-  }
-
-  body {
-    margin: 0;
-    font-family: 'Fira Code', sans-serif;
-    line-height: 1.6;
-
-    --background-color: var(--the-black);
-    --navbar-background: var(--the-black);
-    --footer-background: var(--the-black);
-    --text-color: var(--the-white);
-    --navbar-text-color: var(--the-white);
-    --navbar-glow-color: none;
-    --button-background: var(--the-white);
-    --button-hover: var(--the-accent);
-    --button-text-color: var(--the-beige);
-    --markdown-header-color: var(--the-white);
-    
-    /* HOME */
-    --content-border-color: var(--the-white);
-    --card-project-hover: var(--the-accent);
-    --card-project-title: var(--the-accent);
-    --card-project-border: var(--the-white);
-    --experience-date: var(--the-grey);
-    --experience-title: var(--the-white);
-    --experience-company: var(--the-accent);
-    --section-background: #1a1a1a;
-    --heading-accent: var(--dracula-green);
-    --code-bg: #1f2937;
-    --code-color: #f9fafb;
-    --inline-code-bg: var(--dracula-orange);
-  }
-
-  /* Light theme overrides */
-  body[data-theme="light"] {
-    --background-color: var(--the-white);
-    --navbar-background: var(--the-white);
-    --footer-background: var(--the-white);
-    --text-color: var(--the-black);
-    --navbar-text-color: var(--the-black);
-    --navbar-glow-color: var(--the-black);
-    --button-background: var(--the-black);
-    --button-hover: var(--the-accent);
-    --button-text-color: var(--the-beige);
-    --markdown-header-color: var(--the-black);
-    /* HOME */
-    --content-border-color: var(--the-black);
-    --card-project-hover: var(--the-accent);
-    --card-project-title: var(--the-accent);
-    --card-project-border: var(--the-black);
-    --experience-date: var(--the-beige);
-    --experience-title: var(--the-black);
-    --experience-company: var(--the-accent);
-    --section-background: #ebebeb;
-    --heading-accent: var(--dracula-purple);
-    --code-bg: #e8e8e8;
-    --code-color: #1e1e1e;
-    --inline-code-bg: #ede8f8;
-
-    
-  }
-
-  /* Apply variables to the body */
-  body {
-    background-color: var(--background-color);
-    color: var(--text-color);
-  }
-
   main {
     padding: 2rem;
   }
 
-  .content-area{
+  .content-area {
     max-width: 1200px;
-    margin: 2rem auto;         /* Center horizontally with vertical spacing */
+    margin: 2rem auto;
     padding: 0 1.5rem;
-    padding-top: 30px;;
+    padding-top: 30px;
   }
-  /* Fade-in animation */
+
   .fade-in {
     opacity: 0;
     animation: fadeIn 1s ease-in forwards;
@@ -153,20 +53,13 @@ const { showNavbar = true, showFooter = true } = Astro.props;
   }
 
   @media (max-width: 700px) {
-  .content-area {
-    max-width: 100vw;
-    margin: 2rem auto;         /* Center horizontally with vertical spacing */
-    padding: 0 0rem;
-    padding-top: 40px;;
+    .content-area {
+      max-width: 100vw;
+      padding: 0;
+      padding-top: 40px;
+    }
+    main {
+      padding: 1rem 0;
+    }
   }
-  main {
-    padding: 1rem 0rem;
-  }
-  body {
-    font-size: 0.85rem;
-  }
-  h1, h2, h3 {
-    font-size: 1.2em;
-  }
-}
 </style>

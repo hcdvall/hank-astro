@@ -1,9 +1,5 @@
 ---
-const links = [
-  { href: "/about", label: "About" },
-  { href: "/blog", label: "Blog" },
-  { href: "/projects", label: "Projects" },
-];
+import { NAV_LINKS } from "../consts";
 ---
 <nav class="navbar">
   <!-- Brand/Logo with glitch effect - positioned on the left -->
@@ -21,7 +17,7 @@ const links = [
   
   <!-- Mobile menu - hidden by default, shown when hamburger is clicked -->
   <ul class="navbar-links-mobile" id="navbar-links">
-    {links.map(link => (
+    {NAV_LINKS.map(link => (
       <li>
         <a href={link.href}>{link.label}</a>
       </li>
@@ -37,7 +33,7 @@ const links = [
 
   <!-- Desktop menu - always visible on desktop, hidden on mobile -->
   <ul class="navbar-links-desktop">
-    {links.map(link => (
+    {NAV_LINKS.map(link => (
       <li>
         <a href={link.href}>{link.label}</a>
       </li>
@@ -88,21 +84,6 @@ const links = [
 </script>
 
 <style>
-  @font-face {
-    font-family: 'VT323';
-    src: url('/fonts/VT323-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: 'PressStart2P';
-    src: url('/fonts/PressStart2P-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-  }
-
   .navbar {
     position: fixed;
     top: 0;
@@ -135,7 +116,7 @@ const links = [
     color: var(--dracula-cyan);
     position: relative;
     margin: 0;
-    font-family: 'VT323', monospace;
+    font-family: var(--font-display);
     animation: glitch-navbar 3s infinite;
   }
 
