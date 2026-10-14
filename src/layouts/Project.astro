@@ -1,16 +1,24 @@
 ---
 import MainLayout from './MainLayout.astro';
+import CoverMedia from '../components/CoverMedia.astro';
 import { formatDate } from '../utils';
 
-const { title, startDate, description, author, heroImg, highlight} = Astro.props;
+interface Props {
+  title: string;
+  description: string;
+  startDate: Date;
+  heroImg?: string;
+}
+
+const { title, startDate, description, heroImg } = Astro.props;
 ---
-<MainLayout>
+<MainLayout title={title} description={description}>
   <article class="project">
     <header class="project-header">
       <div class="hero-img-container">
-        <img src={heroImg} class="hero-img" alt={title} />
+        <CoverMedia image={heroImg} alt="" loading="eager" />
       </div>
-      <div class="hero-title">{title}</div>
+      <h1 class="hero-title">{title}</h1>
     </header>
 
     <section class="project-content prose">
@@ -19,7 +27,7 @@ const { title, startDate, description, author, heroImg, highlight} = Astro.props
 
     <footer class="project-footer">
       <p class="project-date">
-        Started on {formatDate(startDate)}
+        Started on <time datetime={startDate.toISOString()}>{formatDate(startDate)}</time>
       </p>
     </footer>
   </article>
@@ -55,18 +63,13 @@ const { title, startDate, description, author, heroImg, highlight} = Astro.props
       overflow: hidden;
       border-radius: 0.5rem;
     }
-    .hero-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    .hero-img-container :global(.cover) {
       filter: blur(3px);
-      display: block;
       border-radius: 0.5rem;
-      box-shadow: 0 2px 12px 0 rgba(0,0,0,0.10);
-      position: relative;
     }
     .hero-title {
       position: absolute;
+      margin: 0;
       top: 2rem;
       left: 50%;
       transform: translate(-50%, 25%);
@@ -81,29 +84,10 @@ const { title, startDate, description, author, heroImg, highlight} = Astro.props
       white-space: nowrap;
     }
 
-    :global(.project-content img) {
-      width: 350px;           /* Default size */
-      max-width: 100%;        /* Shrink to fit container */
-      height: 300px;          /* Keep aspect ratio when shrinking */
-      object-fit: cover;
-      border-radius: 0.5rem;
-      margin: 1rem auto;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-      display: inline-flex; 
-    }
-
     @media (max-width: 900px) {
       .project {
-        padding: 0rem 1.0rem;
-
-      }
-
-      :global(.project-content img) {
-        width: 100%;          /* Full width on small screens */
-        height: auto;         /* Maintain aspect ratio */
-        margin: 1rem auto 0.5rem auto; /* Use margin-top instead of padding-top */
+        padding: 0 1rem;
       }
     }
-
   </style>
 </MainLayout>

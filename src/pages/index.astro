@@ -1,17 +1,14 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
+import { SITE_NAME } from '../consts';
 import { formatDate, getHighlightedProjects, getPosts } from '../utils';
 
 const recentProjects = await getHighlightedProjects(3);
 const [latestPost] = await getPosts();
 ---
-
-<head>
-  <title>Henrik Sedvall</title>
-</head>
-
 <MainLayout>
+  <h1 class="sr-only">{SITE_NAME}</h1>
 
   <!-- About -->
   <section class="section about-section">

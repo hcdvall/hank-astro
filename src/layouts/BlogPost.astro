@@ -2,24 +2,30 @@
 import MainLayout from './MainLayout.astro';
 import { formatDate } from '../utils';
 
+interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+}
+
 const { title, pubDate, description } = Astro.props;
 ---
-<MainLayout>
+<MainLayout title={title} description={description}>
   <article class="blog-post">
     <header class="blog-post-header">
-      <div class="blog-post-title">{"> " + " " + title}</div>
+      <h1 class="blog-post-title">{"> " + " " + title}</h1>
       <p class="blog-post-description">{description}</p>
     </header>
 
     <section class="blog-post-content prose">
-        <slot />
+      <slot />
     </section>
 
     <footer class="blog-post-footer">
-        <p class="blog-post-date">
-          Published on {formatDate(pubDate)}
-        </p>
-      </footer>
+      <p class="blog-post-date">
+        Published on <time datetime={pubDate.toISOString()}>{formatDate(pubDate)}</time>
+      </p>
+    </footer>
   </article>
 
   <style>
@@ -37,6 +43,7 @@ const { title, pubDate, description } = Astro.props;
     .blog-post-title {
       font-size: 3.0em;
       font-family: var(--font-display);
+      font-weight: normal;
       color: var(--heading-accent);
       margin: 0;
       text-shadow: 0px 0px 2px var(--heading-accent), 0px 0px 2px var(--heading-accent);

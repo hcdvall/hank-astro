@@ -9,11 +9,7 @@ const items = (await getPosts()).map(entry => ({
   date: entry.data.pubDate,
 }));
 ---
-<head>
-  <title>Blog | Henrik Sedvall</title>
-</head> 
-
-
-<MainLayout>
+<MainLayout title="Blog">
+  <h1 class="sr-only">Blog</h1>
   <EntryList items={items} />
 </MainLayout>

@@ -44,7 +44,7 @@
 }
 
 /* Dark theme (default) */
-body {
+:root {
   --background-color: var(--the-black);
   --navbar-background: var(--the-black);
   --footer-background: var(--the-black);
@@ -68,7 +68,7 @@ body {
 }
 
 /* Light theme */
-body[data-theme="light"] {
+html[data-theme="light"] {
   --background-color: var(--the-white);
   --navbar-background: var(--the-white);
   --footer-background: var(--the-white);
@@ -103,6 +103,19 @@ body {
   body {
     font-size: 0.85rem;
   }
+}
+
+/* Visually hidden but available to screen readers */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* Markdown content (blog posts and projects) */
@@ -206,6 +219,16 @@ body {
 
 .prose em {
   font-style: italic;
+}
+
+.prose img,
+.prose video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1rem auto;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,46 +1,44 @@
 ---
-import { NAV_LINKS } from "../consts";
+import { NAV_LINKS, SITE_NAME } from "../consts";
+
+const brand = SITE_NAME.toUpperCase().replace(" ", "_");
+const path = Astro.url.pathname.replace(/\/$/, "");
+
+function ariaCurrent(href: string) {
+  if (path === href) return "page";
+  if (path.startsWith(href + "/")) return "true";
+  return undefined;
+}
 ---
 <nav class="navbar">
-  <!-- Brand/Logo with glitch effect - positioned on the left -->
   <div class="navbar-brand">
     <a href="/">
-      <h1 class="glitch-navbar" data-text="HENRIK_SEDVALL">HENRIK_SEDVALL</h1>
+      <span class="glitch-navbar" data-text={brand}>{brand}</span>
     </a>
   </div>
 
-  <!-- Hamburger button - only visible on mobile -->
-  <button class="hamburger" id="hamburger-btn" aria-label="Open menu">
+  <!-- Only visible on mobile -->
+  <button
+    class="hamburger"
+    id="hamburger-btn"
+    aria-label="Open menu"
+    aria-expanded="false"
+    aria-controls="navbar-links"
+  >
     <span class="hamburger-line"></span>
     <span class="hamburger-line"></span>
   </button>
-  
-  <!-- Mobile menu - hidden by default, shown when hamburger is clicked -->
-  <ul class="navbar-links-mobile" id="navbar-links">
-    {NAV_LINKS.map(link => (
-      <li>
-        <a href={link.href}>{link.label}</a>
-      </li>
-    ))}
-    <li class="theme-toggle-mobile">
-      <button id="theme-toggle-mobile" class="theme-toggle">
-        <svg class="lamp-icon" width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M6.293,17.293l-3,3a1,1,0,0,0,1.414,1.414l3-3a1,1,0,0,0-1.414-1.414Z"/><path d="M20.707,20.293l-3-3a1,1,0,0,0-1.414,1.414l3,3a1,1,0,0,0,1.414-1.414Z"/><path d="M12,17a1,1,0,0,0-1,1v3a1,1,0,0,0,2,0V18A1,1,0,0,0,12,17Z"/><path d="M6,15H18a1,1,0,0,0,0-2H17V12a5,5,0,0,0-4.02-4.9A.826.826,0,0,0,13,7V3a1,1,0,0,0-2,0V7a.826.826,0,0,0,.02.1A5,5,0,0,0,7,12v1H6a1,1,0,0,0,0,2Z"/>
-        </svg>
-      </button>
-    </li>
-  </ul>
 
-  <!-- Desktop menu - always visible on desktop, hidden on mobile -->
-  <ul class="navbar-links-desktop">
+  <!-- A row on desktop, a dropdown toggled by the hamburger on mobile -->
+  <ul class="navbar-links" id="navbar-links">
     {NAV_LINKS.map(link => (
       <li>
-        <a href={link.href}>{link.label}</a>
+        <a href={link.href} aria-current={ariaCurrent(link.href)}>{link.label}</a>
       </li>
     ))}
     <li>
-      <button id="theme-toggle-desktop" class="theme-toggle">
-        <svg class="lamp-icon" width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+      <button class="theme-toggle" aria-label="Toggle light and dark theme">
+        <svg class="lamp-icon" width="32" height="32" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path d="M6.293,17.293l-3,3a1,1,0,0,0,1.414,1.414l3-3a1,1,0,0,0-1.414-1.414Z"/><path d="M20.707,20.293l-3-3a1,1,0,0,0-1.414,1.414l3,3a1,1,0,0,0,1.414-1.414Z"/><path d="M12,17a1,1,0,0,0-1,1v3a1,1,0,0,0,2,0V18A1,1,0,0,0,12,17Z"/><path d="M6,15H18a1,1,0,0,0,0-2H17V12a5,5,0,0,0-4.02-4.9A.826.826,0,0,0,13,7V3a1,1,0,0,0-2,0V7a.826.826,0,0,0,.02.1A5,5,0,0,0,7,12v1H6a1,1,0,0,0,0,2Z"/>
         </svg>
       </button>
@@ -49,38 +47,38 @@ import { NAV_LINKS } from "../consts";
 </nav>
 
 <script>
-  function toggleMenu(e) {
-    const links = document.getElementById("navbar-links");
-    if (links) {
-      links.classList.toggle("open");
-    }
+  function setMenuOpen(open: boolean) {
+    document.getElementById("navbar-links")?.classList.toggle("open", open);
+    document.getElementById("hamburger-btn")?.setAttribute("aria-expanded", String(open));
   }
 
-  function handleDocumentClick(e) {
+  function toggleTheme() {
+    const root = document.documentElement;
+    const theme = root.dataset.theme === "light" ? "dark" : "light";
+    root.dataset.theme = theme;
+    localStorage.setItem("theme", theme);
+  }
+
+  // The navbar is re-rendered on every client-side navigation, so its
+  // listeners are attached on each page load.
+  document.addEventListener("astro:page-load", () => {
     const btn = document.getElementById("hamburger-btn");
-    const links = document.getElementById("navbar-links");
-    if (
-      links &&
-      links.classList.contains("open") &&
-      !links.contains(e.target) &&
-      !btn.contains(e.target)
-    ) {
-      links.classList.remove("open");
-    }
-  }
+    const menu = document.getElementById("navbar-links");
+    btn?.addEventListener("click", () => setMenuOpen(!menu?.classList.contains("open")));
+    document.querySelectorAll(".theme-toggle").forEach(toggle => {
+      toggle.addEventListener("click", toggleTheme);
+    });
+  });
 
-  function initializeHamburgerMenu() {
+  // Close the mobile menu when clicking outside it
+  document.addEventListener("click", e => {
+    const target = e.target as Node;
     const btn = document.getElementById("hamburger-btn");
-    if (btn) {
-      btn.removeEventListener("click", toggleMenu);
-      btn.addEventListener("click", toggleMenu);
+    const menu = document.getElementById("navbar-links");
+    if (menu?.classList.contains("open") && !menu.contains(target) && !btn?.contains(target)) {
+      setMenuOpen(false);
     }
-    document.removeEventListener("click", handleDocumentClick);
-    document.addEventListener("click", handleDocumentClick);
-  }
-
-  document.addEventListener("DOMContentLoaded", initializeHamburgerMenu);
-  document.addEventListener("astro:page-load", initializeHamburgerMenu);
+  });
 </script>
 
 <style>
@@ -92,40 +90,37 @@ import { NAV_LINKS } from "../consts";
     max-width: 1140px;
     height: 40px;
     margin: 0 auto;
-    padding: 1.5rem 3.2rem; 
+    padding: 1.5rem 3.2rem;
     background-color: var(--navbar-background);
     color: var(--navbar-text-color);
     font-size: 1rem;
     font-family: var(--header-font);
     display: flex;
-    justify-content: space-between; /* Space between brand and links */
+    justify-content: space-between;
     align-items: center;
     text-shadow: 0px 0px 3px var(--navbar-glow-color), 0px 0px 3px var(--navbar-glow-color);
     z-index: 1000;
     opacity: 0.95;
   }
 
-  /* Navbar brand with glitch effect */
+  /* Brand with glitch effect */
   .navbar-brand {
     flex-shrink: 0;
   }
 
+  .navbar-brand a {
+    text-decoration: none;
+    color: inherit;
+  }
+
   .glitch-navbar {
+    display: block;
     font-size: 3.2rem;
     font-weight: bold;
     color: var(--dracula-cyan);
     position: relative;
-    margin: 0;
     font-family: var(--font-display);
     animation: glitch-navbar 3s infinite;
-  }
-
-  @keyframes glitch-navbar {
-    0%, 100% { transform: translate(0); }
-    20% { transform: translate(-1px, 1px); }
-    40% { transform: translate(-1px, -1px); }
-    60% { transform: translate(1px, 1px); }
-    80% { transform: translate(1px, -1px); }
   }
 
   .glitch-navbar::before,
@@ -150,6 +145,14 @@ import { NAV_LINKS } from "../consts";
     z-index: -2;
   }
 
+  @keyframes glitch-navbar {
+    0%, 100% { transform: translate(0); }
+    20% { transform: translate(-1px, 1px); }
+    40% { transform: translate(-1px, -1px); }
+    60% { transform: translate(1px, 1px); }
+    80% { transform: translate(1px, -1px); }
+  }
+
   @keyframes glitch-navbar-2 {
     0%, 100% { transform: translate(0); }
     20% { transform: translate(1px, -1px); }
@@ -158,84 +161,25 @@ import { NAV_LINKS } from "../consts";
     80% { transform: translate(-1px, 1px); }
   }
 
-  /* Make the brand clickable */
-  .navbar-brand a {
-    text-decoration: none;
-    color: inherit;
-  }
-
-  /* Desktop links - horizontal layout, always visible on desktop */
-  .navbar-links-desktop {
-    display: none; /* Hidden on mobile by default */
+  /* Links */
+  .navbar-links {
     list-style: none;
-    flex-direction: row;
-    gap: 0.5rem; /* Reduced spacing as requested */
     margin: 0;
-    padding: 0;
-    align-items: center;
-    margin-left: auto; /* Push to the right */
   }
 
-  .navbar-links-desktop li {
-    list-style: none;
-  }
-
-  .navbar-links-desktop a {
+  .navbar-links a {
     color: var(--navbar-text-color);
     text-decoration: inherit;
-    padding: 0.3em 0.8em;
-    border-radius: 0.3em;
     transition: background-color 0.2s, transform 0.2s;
   }
 
-  .navbar-links-desktop a:hover {
+  .navbar-links a:hover {
     background-color: var(--button-hover);
-    transform: scale(1.05);
   }
 
-  /* Mobile links - vertical dropdown, hidden by default */
-  .navbar-links-mobile {
-    list-style: none;
-    display: none;
-    flex-direction: column;
-    gap: 1rem;
-    margin: 0;
-    padding: 2rem 1rem 1rem 1rem;
-    width: 300px;
-    max-width: 90vw;
-    position: fixed;
-    top: 0px;
-    left: 50%;
-    transform: translate(-50%, 0);
-    background: var(--navbar-background);
-    z-index: 999;
-    align-items: center;
-    text-align: center;
-    border: 2px solid var(--content-border-color);
-    border-radius: 0.5rem;
-    box-shadow: 0 0 2px var(--navbar-glow-color);
-  }
-
-  .navbar-links-mobile.open {
-    display: flex;
-  }
-
-  .navbar-links-mobile li {
-    list-style: none;
-  }
-
-  .navbar-links-mobile a {
-    color: var(--navbar-text-color);
-    text-decoration: inherit;
-    padding: 0.3em 0.3em;
-    border-radius: 0.0em 0em 0.0em 0em;
-    transition: background-color 0.2s, transform 0.2s;
-  }
-
-  .navbar-links-mobile a:hover {
-    background-color: var(--button-hover);
-    transform: scale(1.15);
-    box-shadow: 0 0 0px var(--button-hover);
+  .navbar-links a[aria-current] {
+    text-decoration: underline;
+    text-underline-offset: 0.3em;
   }
 
   /* Hamburger button */
@@ -258,7 +202,7 @@ import { NAV_LINKS } from "../consts";
     transition: background 0.2s;
   }
 
-  /* Theme toggle styles */
+  /* Theme toggle */
   .theme-toggle {
     background-color: var(--background-color);
     border: none;
@@ -279,36 +223,71 @@ import { NAV_LINKS } from "../consts";
     transform: scale(1.2);
   }
 
-  /* Media queries for responsive behavior */
+  /* Desktop: links in a row, no hamburger */
   @media (min-width: 968px) {
-    /* Desktop: Show desktop links, hide hamburger and mobile links */
-    .navbar-links-desktop {
-      display: flex;
+    .hamburger {
+      display: none;
     }
-    
-    .hamburger,
-    .navbar-links-mobile {
-      display: none !important;
+
+    .navbar-links {
+      display: flex;
+      flex-direction: row;
+      gap: 0.5rem;
+      padding: 0;
+      align-items: center;
+      margin-left: auto;
+    }
+
+    .navbar-links a {
+      padding: 0.3em 0.8em;
+      border-radius: 0.3em;
+    }
+
+    .navbar-links a:hover {
+      transform: scale(1.05);
     }
   }
 
+  /* Mobile: dropdown menu, hidden until the hamburger opens it */
   @media (max-width: 967px) {
-    /* Mobile: Show hamburger, hide desktop links */
-    .navbar-links-desktop {
-      display: none !important;
+    .navbar-links {
+      display: none;
+      flex-direction: column;
+      gap: 1rem;
+      padding: 2rem 1rem 1rem 1rem;
+      width: 300px;
+      max-width: 90vw;
+      position: fixed;
+      top: 0px;
+      left: 50%;
+      transform: translate(-50%, 0);
+      background: var(--navbar-background);
+      z-index: 999;
+      align-items: center;
+      text-align: center;
+      border: 2px solid var(--content-border-color);
+      border-radius: 0.5rem;
+      box-shadow: 0 0 2px var(--navbar-glow-color);
     }
-    
-    .hamburger {
-      display: block;
+
+    .navbar-links.open {
+      display: flex;
+    }
+
+    .navbar-links a {
+      padding: 0.3em;
+    }
+
+    .navbar-links a:hover {
+      transform: scale(1.15);
     }
   }
 
   @media (max-width: 700px) {
     .navbar {
       padding: 1.5rem 0.5rem;
-      
     }
-    .navbar-links-mobile {
+    .navbar-links {
       top: 1.0rem;
       max-width: none;
     }

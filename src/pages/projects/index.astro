@@ -9,11 +9,7 @@ const items = (await getProjects()).map(entry => ({
   date: entry.data.startDate,
 }));
 ---
-<head>
-  <title>Projects | Henrik Sedvall</title>
-</head> 
-
-
-<MainLayout>
+<MainLayout title="Projects">
+  <h1 class="sr-only">Projects</h1>
   <EntryList items={items} />
 </MainLayout>
