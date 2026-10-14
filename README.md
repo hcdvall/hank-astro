@@ -1,91 +1,94 @@
-# Hank Astro Portfolio
+# henriksedvall.com
 
-This is a personal portfolio site built with [Astro](https://astro.build/), featuring blog posts, project showcases, and a custom Dracula-inspired theme.
+Personal site built with [Astro](https://astro.build/): a blog, game dev projects and an about page.
 
-## Features
+## Running it
 
-- **Astro-powered static site** for fast performance and easy deployment
-- **Blog**: Write posts in Markdown with custom layouts and code highlighting
-- **Projects**: Showcase your projects with hero images, descriptions, and custom Markdown content
-- **Dracula color theme** for a modern, dark look
-- **Responsive design** for desktop and mobile
-- **Customizable Navbar** with links to Home, About, Blog, and Projects
-- **Themed content areas** with terminal-inspired styling
-- **Image handling**: Hero images for projects, with support for additional images in Markdown
-- **Content collections** powered by Astro Content Collections
+```bash
+npm install
+npm run dev       # http://localhost:4321, drafts included
+npm run build     # static site in dist/, drafts excluded
+npm run preview   # serve dist/
+npm run check     # type-check .astro/.ts files
+```
 
-## Getting Started
+## Adding a blog post
 
-1. **Install dependencies:**
-   ```bash
-   npm install
-   ```
+```bash
+npm run new:post "My title"
+```
 
-2. **Run the development server:**
-   ```bash
-   npm run dev
-   ```
+This creates `src/content/blog/my-title/index.md` with `draft: true`. Write in it, then set `draft: false` (or delete the line) to publish. The URL is `/blog/my-title/`, taken from the folder name.
 
-3. **Build for production:**
-   ```bash
-   npm run build
-   ```
+- **Images** go in the same folder: `![Alt text](./diagram.png)`. Astro optimizes them at build time.
+- **Headings** start at `##`. The post title is already rendered as the page's `<h1>`.
+- **Drafts** are visible in `npm run dev` and left out of `npm run build`.
 
-4. **Preview the production build:**
-   ```bash
-   npm run preview
-   ```
+## Adding a project
 
-## Project Structure
+```bash
+npm run new:project "My project"
+```
+
+This creates `src/content/projects/my-project/index.md`. It works like a post, plus:
+
+- **Cover**: put a still image in the folder and set `cover: ./cover.jpg`. It is used on the home page card and the project page header.
+- **Cover clip** (optional): set `coverVideo: /media/my-project/cover.mp4`. The `cover` image becomes its poster.
+- **Clips in the text**: convert GIFs to MP4 and put them in `public/media/<slug>/`:
+
+  ```bash
+  scripts/convert-media.sh capture.gif public/media/my-project/jump.mp4
+  # also extract the first frame as a cover image:
+  scripts/convert-media.sh capture.gif public/media/my-project/cover.mp4 src/content/projects/my-project/cover.jpg
+  ```
+
+  Then reference a clip with normal image syntax: `![Jump](/media/my-project/jump.mp4)`. It renders as an autoplaying, looping, muted video (see `src/plugins/remark-video.mjs`). Clips are kept in `public/` because Astro can't bundle videos referenced from Markdown.
+- **Home page**: set `highlight: true` to feature the project on the home page (newest three are shown).
+
+## Frontmatter reference
+
+Schemas live in `src/content.config.ts`.
+
+| Field | Blog | Projects | Notes |
+| --- | --- | --- | --- |
+| `title` | required | required | |
+| `description` | required | required | Used for meta description and cards |
+| `pubDate` | required | | `YYYY-MM-DD` |
+| `startDate` | | required | `YYYY-MM-DD` |
+| `updatedDate` | optional | optional | |
+| `draft` | default `false` | default `false` | Hidden from production builds |
+| `author` | optional | optional | Not rendered |
+| `cover` | | optional | Path to an image next to `index.md` |
+| `coverVideo` | | optional | Path under `public/`, e.g. `/media/<slug>/cover.mp4` |
+| `highlight` | | default `false` | Show on the home page |
+| `links` | | optional | `repo`, `itch`, `video` URLs, shown under the project |
+
+## Project structure
 
 ```
 src/
-  components/      # Reusable UI components (Navbar, Footer, ThemeToggle, etc.)
+  assets/             images imported by pages (profile photo)
+  components/         Navbar, Footer, ProjectCard, EntryList, CoverMedia
   content/
-    blog/          # Blog posts in Markdown
-    projects/      # Project entries in Markdown
-    config.ts      # Content collections schema
-  layouts/         # Astro layout components (MainLayout, BlogPost, Project, etc.)
-  pages/           # Astro pages (routes)
+    blog/<slug>/      index.md + its images
+    projects/<slug>/  index.md + cover.jpg + other images
+  layouts/            MainLayout (head, SEO, theme), BlogPost, Project
+  pages/              routes
+  plugins/            remark-video.mjs
+  styles/global.css   design tokens, fonts, light/dark theme, .prose
+  consts.ts           site name, description, nav and social links
+  content.config.ts   collection schemas
+  utils.ts            formatDate, getPosts, getProjects (sorted, drafts filtered)
 public/
-  images/          # Static images (hero images, blog images, etc.)
+  media/<slug>/       video clips
+  fonts/              VT323, Press Start 2P, Fira Code
+scripts/
+  new.mjs             scaffolds posts and projects
+  convert-media.sh    GIF -> MP4
 ```
 
-## Content Collections
+Colors and fonts live in `src/styles/global.css`. The light theme overrides the variables under `html[data-theme="light"]`. Nav and social links are in `src/consts.ts`.
 
-- **Blog posts**:  
-  Located in `src/content/blog/`.  
-  Frontmatter fields: `title`, `description`, `pubDate`, `author`.
+## Deployment
 
-- **Projects**:  
-  Located in `src/content/projects/`.  
-  Frontmatter fields: `title`, `description`, `startDate`, `author` (optional), `heroImg` (optional).
-
-## Adding Content
-
-- **Add a blog post:**  
-  Create a new `.md` file in `src/content/blog/` with the required frontmatter.
-
-- **Add a project:**  
-  Create a new `.md` file in `src/content/projects/` with the required frontmatter.  
-  Place hero images in `public/images/` and reference them with a leading `/`.
-
-## Customization
-
-- **Colors and theme:**  
-  Edit CSS variables in `src/layouts/MainLayout.astro` for Dracula theme customization.
-
-- **Navigation:**  
-  Update `src/components/Navbar.astro` to add or remove links.
-
-- **Image styles:**  
-  Adjust image styling in `src/layouts/Project.astro` for hero and content images.
-
-## License
-
-This project is for personal use and demonstration.  
-Feel free to adapt it for your own portfolio!
-
----
-
-Built with [Astro](https://astro.build/) 🚀
+Pushing to `main` runs `.github/workflows/deploy.yml`, which builds with `withastro/action` and publishes to GitHub Pages. `public/CNAME` maps the site to `www.henriksedvall.com`, which must match `site` in `astro.config.mjs` (used for canonical URLs and the sitemap).

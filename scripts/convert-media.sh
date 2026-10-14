@@ -25,6 +25,7 @@ to_mp4() {
 
 to_poster() {
   local in=$1 out=$2
+  mkdir -p "$(dirname "$out")"
   ffmpeg -hide_banner -loglevel error -y -i "$in" -vf "$SCALE" -frames:v 1 -q:v 3 "$out"
   echo "$in -> $out ($(du -h "$out" | cut -f1))"
 }
