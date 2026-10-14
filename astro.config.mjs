@@ -1,8 +1,11 @@
 import { defineConfig } from 'astro/config';
-import markdoc from '@astrojs/markdoc';  
+import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  integrations: [markdoc()],
-  site: 'https://henriksedvall.com',
-  base: '/',
+  site: 'https://www.henriksedvall.com',
+  integrations: [sitemap()],
+  redirects: {
+    '/portfolio': '/',
+    '/home': '/',
+  },
 });

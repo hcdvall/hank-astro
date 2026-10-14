@@ -96,18 +96,6 @@ import MainLayout from '../layouts/MainLayout.astro';
       flex-shrink: 0;
     }
 
-    .hero h1 {
-      font-size: 2.5rem;
-      margin: 0.5rem 0;
-      color: var(--navbar-glow-color, #50fa7b);
-    }
-
-    .tagline {
-      font-size: 1.2rem;
-      color: var(--text-muted, #999);
-      margin: 0;
-    }
-
     /* Content Sections */
     .content-section {
       margin-top: 0;
@@ -144,21 +132,6 @@ import MainLayout from '../layouts/MainLayout.astro';
     .about-text p {
       margin: 0;
       font-size: 1.5rem;
-    }
-
-    /* Skills Grid */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1rem;
-      margin-top: 1.5rem;
-    }
-
-    .skill-item {
-      padding: 0.75rem;
-      background: var(--background-secondary, rgba(255,255,255,0.05));
-      border-radius: 0.5rem;
-      font-size: 1rem;
     }
 
     .job-grid {
@@ -205,15 +178,10 @@ import MainLayout from '../layouts/MainLayout.astro';
       line-height: 1.4;
     }
 
-
     /* Mobile Responsive */
     @media (max-width: 768px) {
       .about-container {
         padding: 1rem 0.5rem;
-      }
-
-      .hero h1 {
-        font-size: 2rem;
       }
 
       .about-flex {
@@ -227,10 +195,6 @@ import MainLayout from '../layouts/MainLayout.astro';
         margin: 0;
         font-size: 1.2rem;
         font-weight: 800;
-      }
-
-      .skills-grid {
-        grid-template-columns: 1fr;
       }
 
       .profile-image {

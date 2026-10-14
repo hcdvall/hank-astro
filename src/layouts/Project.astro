@@ -39,23 +39,9 @@ const { title, startDate, description, author, heroImg, highlight} = Astro.props
       text-align: left;
     }
 
-    .project-title {
-      font-size: 2em;
-      color: var(--markdown-header-color);
-      margin: 0;
-      text-shadow: 
-        0px 0px 3px var(--markdown-header-color), 
-        0px 0px 3px var(--markdown-header-color);
-    }
-
     .project-date {
       font-size: 0.9em;
       margin: 5px 0;
-    }
-
-    .project-description {
-      font-size: 1.2em;
-      margin: 10px 0;
     }
 
     .project-content {
@@ -168,7 +154,7 @@ const { title, startDate, description, author, heroImg, highlight} = Astro.props
       background-color: var(--inline-code-bg);
       padding: 0.2rem 0.4rem;
       border-radius: 3px;
-      font-family: 'Hermit', monospace;
+      font-family: monospace;
       font-weight: bold;
       font-size: 0.9em;
     }
@@ -203,19 +189,6 @@ const { title, startDate, description, author, heroImg, highlight} = Astro.props
 
     :global(.project-content em) {
       font-style: italic;
-    }
-
-    :global(.project-content h1, h2, h3, h4)
-    {
-      text-shadow: 
-        0px 
-        0px 
-        0px 
-        var(--markdown-header-color), 
-        0px 
-        0px 
-        0px 
-        var(--markdown-header-color);
     }
 
     :global(.project-content img) {
