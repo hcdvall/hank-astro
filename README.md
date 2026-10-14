@@ -42,7 +42,7 @@ This creates `src/content/projects/my-project/index.md`. It works like a post, p
   scripts/convert-media.sh capture.gif public/media/my-project/cover.mp4 src/content/projects/my-project/cover.jpg
   ```
 
-  Then reference a clip with normal image syntax: `![Jump](/media/my-project/jump.mp4)`. It renders as an autoplaying, looping, muted video (see `src/plugins/remark-video.mjs`). Clips are kept in `public/` because Astro can't bundle videos referenced from Markdown.
+  Then reference a clip with normal image syntax: `![Jump](/media/my-project/jump.mp4)`. It renders as an autoplaying, looping, muted video (see `src/plugins/remark-video.mjs`). Clips are kept in `public/` because Astro can't bundle videos referenced from Markdown. Astro caches rendered Markdown, so after editing that plugin restart with `npx astro dev --force`.
 - **Home page**: set `highlight: true` to feature the project on the home page (newest three are shown).
 
 ## Frontmatter reference
