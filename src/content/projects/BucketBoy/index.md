@@ -3,7 +3,8 @@ title: "Bucket Boy"
 description: "Haunted puzzle platformer powered by a flashlight"
 startDate: 2021-10-15
 author: "Henrik Sedvall"
-heroImg: "/images/buckey_boy/Bucket_boy_floating.gif"
+cover: ./cover.jpg
+coverVideo: /media/bucketboy/cover.mp4
 highlight: true
 ---
 
@@ -38,7 +39,7 @@ The floating enemy would be idle if the player was:
 
 The floating enemy would move towards the player if the player were close enough and moving away from the enemy.
 
-![Floating Enemy](/images/buckey_boy/Bucket_boy_floating_resized.gif)
+![Floating Enemy](/media/bucketboy/Bucket_boy_floating_resized.mp4)
 
 #### Thoughts:
 I wrote the code this way because it made me able to disregard the rotation of the player. 
@@ -69,8 +70,8 @@ In this state, the patrolling enemy behaved similarly to the floating enemy, but
 - It couldn’t pass through floors or walls, making it feel less “ghost-like.”  
 - Movement was handled simply by checking if the player was left or right of the enemy, then applying `Translate()` along the x-axis.  
 
-![Floating Enemy](/images/buckey_boy/Bucket_boy_patrolling_resized.gif)
-![Floating Enemy](/images/buckey_boy/Bucket_boy_grabbing_resized.gif)
+![Floating Enemy](/media/bucketboy/Bucket_boy_patrolling_resized.mp4)
+![Floating Enemy](/media/bucketboy/Bucket_boy_grabbing_resized.mp4)
 
 #### Thoughts:
 I think this was a feasible approach to make a patrolling enemy. I initially casted rays directly from the enemy game object but found it better to use a child object (kind of like casting rays from player eyes in other games/scenarios) since it made it easier to detect no-ground and make the enemy turn around in time before falling of platforms.

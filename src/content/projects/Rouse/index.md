@@ -3,7 +3,8 @@ title: "Rouse"
 description: "Third person physics-based puzzle game"
 startDate: 2022-06-15
 author: "Henrik Sedvall"
-heroImg: "/images/rouse/Rouse_aiming_abort_sprint.gif"
+cover: ./cover.jpg
+coverVideo: /media/rouse/cover.mp4
 highlight: true
 ---
 # About
@@ -20,8 +21,8 @@ Jumping went through multiple iterations to balance precision and flow. The syst
 
 To enhance falling, I applied `AddActorWorldOffset()` whenever detecting negative Z-velocity, accelerating descent over time for a more natural feel.
 
-![Jumping Idle](/images/rouse/Rouse_idle_jump_resized.gif)
-![Jumping Moving](/images/rouse/Rouse_moving_jump_resized.gif)
+![Jumping Idle](/media/rouse/Rouse_idle_jump_resized.mp4)
+![Jumping Moving](/media/rouse/Rouse_moving_jump_resized.mp4)
 
 ## Aiming Down Sights (ADS)
 ADS was critical, as it was the only way to shoot and interact with puzzles.
@@ -32,14 +33,14 @@ ADS was critical, as it was the only way to shoot and interact with puzzles.
 - Adjusted movement speed and mouse sensitivity while aiming.
 - Sprinting is interrupted when aiming but seamlessly resumes if the sprint key is still held, preserving flow.
 
-![Aiming](/images/rouse/Rouse_aiming_resized.gif)
-![Aiming Abort](/images/rouse/Rouse_aiming_abort_sprint_resized.gif)
+![Aiming](/media/rouse/Rouse_aiming_resized.mp4)
+![Aiming Abort](/media/rouse/Rouse_aiming_abort_sprint_resized.mp4)
 
 ## Sprinting
 Added late but greatly improved game feel and player control. While not strictly necessary for platforming, sprinting made traversal more comfortable and responsive.
 
-![Sprinting](/images/rouse/Rouse_sprinting_resized.gif)
-![Sprinting Jump](/images/rouse/Rouse_sprinting_jump_resized.gif)
+![Sprinting](/media/rouse/Rouse_sprinting_resized.mp4)
+![Sprinting Jump](/media/rouse/Rouse_sprinting_jump_resized.mp4)
 
 # Thoughts
 Beyond programming, I supported animation and sound integration and performed extensive playtesting (with limited QA resources) to refine mechanics.

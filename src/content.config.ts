@@ -25,8 +25,6 @@ const projects = defineCollection({
       draft: z.boolean().default(false),
       cover: image().optional(),
       coverVideo: z.string().optional(),
-      // Deprecated: public/ path to a hero image. Replaced by cover/coverVideo.
-      heroImg: z.string().optional(),
       highlight: z.boolean().default(false),
       links: z
         .object({

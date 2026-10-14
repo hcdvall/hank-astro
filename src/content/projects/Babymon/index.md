@@ -3,7 +3,8 @@ title: "Babymon"
 description: "A whimsical and hectic babysitting simulation"
 startDate: 2022-01-10
 author: "Henrik Sedvall"
-heroImg: "/images/babymon/Babymon_zoom.gif"
+cover: ./cover.jpg
+coverVideo: /media/babymon/cover.mp4
 highlight: true
 ---
 
@@ -19,8 +20,8 @@ I worked as a **Gameplay Programmer**, mainly handling camera movement, player c
 - Clamped camera in X and Z using `Math.Clamp`.  
 - Added sweep/zoom for cooking and (later deprecated) mini-games.  
 
-![Camera](/images/babymon/Babymon_camera.gif)
-![Zoom](/images/babymon/Babymon_zoom_resized.gif)
+![Camera](/media/babymon/Babymon_camera.mp4)
+![Zoom](/media/babymon/Babymon_zoom_resized.mp4)
 
 
 ### Player Controller
@@ -29,8 +30,8 @@ I worked as a **Gameplay Programmer**, mainly handling camera movement, player c
 - Developed a jump mechanic, iteratively syncing sounds, animations, and physics.  
 - Added multiple colliders to improve movement, collisions, and jump feel.  
 
-![Jump Mechanic](/images/babymon/Babymon_jump.gif)
-![Interactions](/images/babymon/Babymon_interaction.gif)
+![Jump Mechanic](/media/babymon/Babymon_jump.mp4)
+![Interactions](/media/babymon/Babymon_interaction.mp4)
 
 ### Player Interactions
 - Built distinct actions for picking up objects vs. babies.  

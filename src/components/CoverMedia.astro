@@ -20,7 +20,7 @@ const poster =
     : undefined;
 ---
 {video ? (
-  <video class:list={['cover', className]} autoplay muted loop playsinline poster={poster} aria-label={alt}>
+  <video class:list={['cover', className]} autoplay muted loop playsinline poster={poster} aria-label={alt || undefined} aria-hidden={alt ? undefined : "true"}>
     <source src={video} type="video/mp4" />
   </video>
 ) : typeof image === 'string' ? (
